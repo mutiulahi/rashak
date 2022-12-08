@@ -2,8 +2,6 @@
 <html class="no-js" lang="en" dir="ltr">
 
 
-<!-- Mirrored from www.pixelwibes.com/template/my-task/html/dist/ui-elements/auth-signin.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Nov 2022 12:10:29 GMT -->
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">

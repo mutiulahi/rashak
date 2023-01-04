@@ -152,41 +152,6 @@ include "includes/config.php";
                                                         <label class="mb-2" for="exampleInputEmail1">Resciept of commitment Fee</label>
                                                         <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Upload commitment fee reciept">
                                                     </div>
-                                                   
-                                                    <table>
-                                                        <th>
-                                                            <td>Select</td>
-                                                            <td>Options</td>
-                                                        </th>
-                                                        <tr>
-                                                            <td> <input type="checkbox"></td>
-                                                            <td>Training</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <input type="checkbox"></td>
-                                                            <td>Land Preperation</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <input type="checkbox"></td>
-                                                            <td>Pre Emergence Herbicide application (Date)</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <input type="checkbox"></td>
-                                                            <td>Planted (Date)</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <input type="checkbox"></td>
-                                                            <td>Post Emergence Herbicide (Date)</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <input type="checkbox"></td>
-                                                            <td>Fertilized (Date)</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <input type="checkbox"></td>
-                                                            <td>Fertilized (Date)</td>
-                                                        </tr>
-                                                    </table>
                                                     <button class="btn-primary"> <input type="submit"> Submit</button>
                                                 </div>
                                             </div>

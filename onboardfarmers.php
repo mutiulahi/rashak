@@ -52,7 +52,7 @@ include "includes/config.php";
                                                 <div class="col-md-12">
                                                     <div class="form-group mb-4">
                                                         <label class="mb-2" for="exampleInputEmail1">First Name</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter First Name">
+                                                        <input type="text" class="form-control" id="exampleInputEmail1" name="firstname" aria-describedby="emailHelp" placeholder="Enter First Name">
                                                     </div>
                                                     <div class="form-group mb-4">
                                                         <label class="mb-2" for="exampleInputEmail1">Last Name</label>
@@ -89,8 +89,8 @@ include "includes/config.php";
                                                     </div>
                                                     <div class="form-group mb-4">
                                                         <label class="mb-2" for="exampleInputEmail1">Do ypu have children</label>
-                                                        <input type="radio" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="disabl">Yes 
-                                                        <input type="radio" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="disabl">No
+                                                        <input type="radio" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="doyouhavechildren">Yes 
+                                                        <input type="radio" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="doyouhavechildren">No
                                                     </div>
                                                     <div class="form-group mb-4">
                                                         <label class="mb-2" for="exampleInputEmail1">Numbers of Children</label>
@@ -98,7 +98,7 @@ include "includes/config.php";
                                                     </div>
                                                     <div class="form-group mb-4">
                                                         <label class="mb-2" for="exampleInputEmail1">Are your children enrolled in school</label>
-                                                        <select name="" id="">
+                                                        <select name="is_children_in_school" id="">
                                                             <option value="">Yes-Private school</option>
                                                             <option value="">Yes-Public school</option>
                                                             <option value="">No</option>

@@ -36,8 +36,8 @@ include "includes/config.php";
                                 <h3 class="fw-bold py-3 mb-0">Farmers</h3>
                                 <div class="d-flex py-2 project-tab flex-wrap w-sm-100">
                                 <?php if($_SESSION['id'] == 4) { ?>
-                                    <button type="button" class="btn btn-dark w-sm-100" data-bs-toggle="modal" data-bs-target="#createproject"><i class="icofont-plus-circle me-2 fs-6"></i>Add Farmer</button>
-                                <?php } ?>
+                                        <button type="button" class="btn btn-dark w-sm-100"  data-bs-target="#createproject"><i class="icofont-plus-circle me-2 fs-6"></i>Add Farmer</button>                                
+                                        <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -70,8 +70,10 @@ include "includes/config.php";
                                                         <td><?php echo $email; ?></td>
                                                         <td>
                                                             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editproject<?php echo $id; ?>"><i class="icofont-edit text-success"></i></button>
-                                                                <button type="button" class="btn btn-outline-secondary deleterow"><i class="icofont-ui-delete text-danger"></i></button>
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editproject<?php echo 
+                                                                 $id; ?>"><i class="icofont-edit text-success"></i></button>
+                                                                <button type="button" class="btn btn-outline-secondary deleterow"><i class="icofont-ui-delete text-danger"></i> 
+                                                             </button>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -90,10 +92,12 @@ include "includes/config.php";
                                                                             <div class="row g-3 mb-3">
                                                                                 <div class="col-sm-12">
                                                                                     <label class="form-label">Name</label>
-                                                                                    <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" id="exampleFormControlInput77" placeholder="Fullname">
+                                                                                    <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" 
+                                                                                     id="exampleFormControlInput77" placeholder="Fullname">
                                                                                     <div class="col-sm-12">
                                                                                         <label for="formFileMultipleone" class="form-label">Email</label>
-                                                                                        <input class="form-control" type="email" value="<?php echo $email; ?>" name="email" id="formFileMultipleone" multiple>
+                                                                                        <input class="form-control" type="email" value="<?php echo $email; ?>" name="email" 
+                                                                                         id="formFileMultipleone" multiple>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

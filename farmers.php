@@ -71,7 +71,8 @@ include "includes/config.php";
                                                     $id = $FarmersRow['unique_id'];
                                                     $name = $FarmersRow['last_name'] . ' ' . $FarmersRow['first_name'];
                                                     $email = $FarmersRow['email'];
-                                                    $created_at = 'kk';
+                                                    $phone = $FarmersRow['phone_number'];
+                                                    $date_of_birth = $FarmersRow['date_of_birth'];
                                             ?>
                                                     <tr>
                                                         <td><?php echo $id; ?></td>
@@ -152,14 +153,32 @@ include "includes/config.php";
 
                                                     <!-- details -->
                                                     <div class="modal fade" id="details<?php echo substr($id, -4); ?>" tabindex="-1" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+                                                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title  fw-bold" id="editprojectLabel">Farmer Info Details</h5>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
-                                                                <div class="modal-body">
-
+                                                                <!-- farmer details -->
+                                                                <div class="modal-body p-0">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <div class="card">
+                                                                                        <div class="card-body">
+                                                                                            <div class="d-flex align-items-center">
+                                                                                                <div class="flex-shrink-0 me-3">
+                                                                                                    <img src="assets/images/users/avatar-1.jpg" alt="" class="rounded-circle" width="50">
+                                                                                                </div>
+                                                                                                <div class="flex-grow-1">
+                                                                                                    <h5 class="mb-1"><?php echo $name; ?></h5>
+                                                                                                    <p class="mb-4"><?php echo $email; ?></p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
                                                                 </div>
                                                             </div>
                                                         </div>

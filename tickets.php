@@ -11,7 +11,7 @@ include "includes/config.php";
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>:: Farm-Activity:: Tickets</title>
+    <title>:: Farm-Harvest</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
     <!-- plugin css file  -->
     <link rel="stylesheet" href="assets/plugin/datatables/responsive.dataTables.min.css">
@@ -39,9 +39,9 @@ include "includes/config.php";
                     <div class="row align-items-center">
                         <div class="border-0 mb-4">
                             <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
-                                <h3 class="fw-bold mb-0">Activities</h3>
+                                <h3 class="fw-bold mb-0">Harvest History</h3>
                                 <div class="col-auto d-flex w-sm-100">
-                                    <button type="button" class="btn btn-dark btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#tickadd"><i class="icofont-plus-circle me-2 fs-6"></i>Add Activity</button>
+                                    <button type="button" class="btn btn-dark btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#tickadd"><i class="icofont-plus-circle me-2 fs-6"></i>Add Histroy</button>
                                 </div>
                             </div>
                         </div>
@@ -53,10 +53,11 @@ include "includes/config.php";
                                     <table id="myProjectTable" class="table table-hover align-middle mb-0" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>Activity Id</th>
-                                                <th>Activity</th>
-                                                <th>Activity Stating Date</th>
-                                                <th>Activity Ending Date</th>
+                                                <th>Farm Id</th>
+                                                <th>Crop</th>
+                                                <th>Harvest Date</th>
+                                                <th>Total Yield</th>
+                                                <th>Warehouse to be delivered to</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>

@@ -71,6 +71,10 @@ include "includes/config.php";
                                                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="date_of_birth" placeholder="Enter Date Of Birth">
                                                 </div>
                                                 <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Enter type of Crop</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="input_crop" placeholder="Enter Crop">
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
                                                     <label class="mb-2" for="exampleInputEmail1">Gender</label>
                                                     <select name="gender" id="" class="form-control">
                                                         <option>Select your gender</option>

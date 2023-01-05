@@ -61,6 +61,7 @@ include "includes/config.php";
                                                 <th>Id</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
+                                                <th>Input Crop</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -71,6 +72,7 @@ include "includes/config.php";
                                                     $id = $FarmersRow['unique_id'];
                                                     $name = $FarmersRow['last_name'] . ' ' . $FarmersRow['first_name'];
                                                     $email = $FarmersRow['email'];
+                                                    $input_crop = $FarmersRow['input_crop'];
                                                     $phone = $FarmersRow['phone_number'];
                                                     $date_of_birth = $FarmersRow['date_of_birth'];
                                                     $gender = $FarmersRow['gender'];
@@ -96,15 +98,49 @@ include "includes/config.php";
                                                         <td><?php echo $id; ?></td>
                                                         <td><?php echo $name; ?></td>
                                                         <td><?php echo $email; ?></td>
+                                                        <td><?php echo $input_crop; ?></td>
                                                         <td>
                                                             <div class="btn-group" role="group" aria-label="Basic outlined example">
                                                                 <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editproject<?php echo substr($id, -4); ?>"><i class="icofont-edit text-success"></i></button>
-                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#checklist<?php echo substr($id, -4); ?>"><i class="icofont-check text-primary"></i></button>
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#checklist<?php echo substr($id, -4); ?>">Monitor field</button>
+                                                                <a href="tickets.php?farm_id=<?php echo $id; ?>" class="btn btn-outline-secondary">Harvest</a>
                                                                 <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#details<?php echo substr($id, -4); ?>"><i class="fa fa-eye text-primary"></i></button>
                                                                 <button type="button" class="btn btn-outline-secondary deleterow"><i class="icofont-ui-delete text-danger"></i></button>
                                                             </div>
                                                         </td>
                                                     </tr>
+                                                    <div class="modal fade" id="editproject<?php echo substr($id, -4); ?>" tabindex="-1" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title  fw-bold" id="editprojectLabel"> Edit Farmar</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form action="includes/process.php" method="post">
+                                                                        <input type="hidden" class="form-control" name="redirect" value="farmers.php">
+                                                                        <input type="hidden" class="form-control" name="id" value="<?php echo $id ?>">
+                                                                        <div class="deadline-form">
+                                                                            <div class="row g-3 mb-3">
+                                                                                <div class="col-sm-12">
+                                                                                    <label class="form-label">Name</label>
+                                                                                    <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" id="exampleFormControlInput77" placeholder="Fullname">
+                                                                                    <div class="col-sm-12">
+                                                                                        <label for="formFileMultipleone" class="form-label">Email</label>
+                                                                                        <input class="form-control" type="email" value="<?php echo $email; ?>" name="email" id="formFileMultipleone" multiple>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="submit" name="edit_user" class="btn btn-primary">Submit</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                     <div class="modal fade" id="editproject<?php echo substr($id, -4); ?>" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
                                                             <div class="modal-content">
@@ -164,32 +200,60 @@ include "includes/config.php";
                                                                                         $fertilized = $result_data['fertilized'];
                                                                                         $harvest = $result_data['harvest'];
                                                                                     }
+                                                                                    if (empty($training)) {
+                                                                                        $training = 'No';
+                                                                                    }
+                                                                                    if (empty($land_preparation)) {
+                                                                                        $land_preparation = 'No';
+                                                                                    }
                                                                                     ?>
-                                                                                    <div class="col-sm-12">
+
+                                                                                    <div class="col-sm-12 mb-3">
                                                                                         <div class="form-check">
-                                                                                            <input class="form-check-input" type="checkbox" name="training" id="exampleRadios11" value="Yes">
+                                                                                            <input class="form-check-input" type="checkbox" <?php if ($training == 'Yes') {
+                                                                                                                                                echo 'checked';
+                                                                                                                                            } ?> name="training" id="exampleRadios11" value="Yes">
                                                                                             <label class="form-check-label" for="exampleRadios11">Training</label>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-sm-12">
+                                                                                    <div class="col-sm-12 mb-3">
                                                                                         <div class="form-check">
-                                                                                            <input class="form-check-input" type="checkbox" name="land_preparation" id="exampleRadios11" value="Yes">
+                                                                                            <input class="form-check-input" type="checkbox" <?php if ($land_preparation == 'Yes') {
+                                                                                                                                                echo 'checked';
+                                                                                                                                            } ?> name="land_preparation" id="exampleRadios11" value="Yes">
                                                                                             <label class="form-check-label" for="exampleRadios11">Land preparation</label>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-sm-12">
+
+                                                                                    <div class="col-sm-12 mb-3">
                                                                                         <label for="formFileMultipleone" class="form-label">Received input date</label>
-                                                                                        <input type="date" class="form-control" name="received_input" id="">
+                                                                                        <input type="date" class="form-control" value="<?php echo $receiveid_input; ?>" name="receiveid_input" id="">
                                                                                     </div>
-                                                                                    <div class="col-sm-12">
+                                                                                    <div class="col-sm-12 mb-3">
+                                                                                        <label for="formFileMultipleone" class="form-label">Pre Emergence Herbicide Application Data</label>
+                                                                                        <input type="date" class="form-control" value="<?php echo $pre_emerg_herbicide; ?>" name="pre_emerg_herbicide_app" id="">
+                                                                                    </div>
+                                                                                    <div class="col-sm-12 mb-3">
                                                                                         <label for="formFileMultipleone" class="form-label">Planted date</label>
-                                                                                        <input type="date" class="form-control" name="planted" id="">
+                                                                                        <input type="date" class="form-control" value="<?php echo $planted; ?>" name="planted" id="">
+                                                                                    </div>
+                                                                                    <div class="col-sm-12 mb-3">
+                                                                                        <label for="formFileMultipleone" class="form-label">Post Emergence Herbicide Application Data</label>
+                                                                                        <input type="date" class="form-control" value="<?php echo $post_emerg_herbicide; ?>" name="post_emerg_herbicide_app" id="">
+                                                                                    </div>
+                                                                                    <div class="col-sm-12 mb-3">
+                                                                                        <label for="formFileMultipleone" class="form-label">Fertilized Date</label>
+                                                                                        <input type="date" class="form-control" value="<?php echo $fertilized; ?>" name="fertilized" id="">
+                                                                                    </div>
+                                                                                    <div class="col-sm-12 mb-3">
+                                                                                        <label for="formFileMultipleone" class="form-label">Harvest Date</label>
+                                                                                        <input type="date" class="form-control" value="<?php echo $harvest; ?>" name="harvest" id="">
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="submit" name="check_list" class="btn btn-primary">Submit</button>
+                                                                            <button type="submit" name="update_farmer_check_list" class="btn btn-primary">Update</button>
                                                                         </div>
                                                                     </form>
                                                                 </div>
@@ -197,6 +261,7 @@ include "includes/config.php";
                                                         </div>
                                                     </div>
 
+                                                    
                                                     <!-- details -->
                                                     <div class="modal fade" id="details<?php echo substr($id, -4); ?>" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -210,16 +275,56 @@ include "includes/config.php";
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <div class="row">
-                                                                                <div class="col-md-4">
+                                                                                <div class="col-md-12">
                                                                                     <div class="card">
                                                                                         <div class="card-body">
                                                                                             <div class="d-flex align-items-center">
                                                                                                 <div class="flex-shrink-0 me-3">
-                                                                                                    <img src="assets/images/users/avatar-1.jpg" alt="" class="rounded-circle" width="50">
+                                                                                                    <img src="<?php echo $upload_profile_picture; ?>" alt="" class="rounded-circle" width="50">
                                                                                                 </div>
-                                                                                                <div class="flex-grow-1">
+                                                                                                <!-- <div class="flex-grow-1">
                                                                                                     <h5 class="mb-1"><?php echo $name; ?></h5>
                                                                                                     <p class="mb-4"><?php echo $email; ?></p>
+                                                                                                </div> -->
+                                                                                            </div>
+                                                                                            <div class="row">
+                                                                                                <div class="col-md-6">
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Name</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $name; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Email</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $email; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Phone Number</label>
+                                                                                                        <span class="text-muted"><?php echo $phone; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Date of Birth</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $date_of_birth; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Gender</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $gender; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Marital Status</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $marital_status; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Marital Status</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $marital_status; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Marital Status</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $marital_status; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Marital Status</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $marital_status; ?></span>
+                                                                                                    </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -228,10 +333,13 @@ include "includes/config.php";
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                            <?php
+                                                        }
+                                                    } ?>
                                                                 </div>
-                                                        <?php
-                                                    }
-                                                } ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                         </tbody>
                                     </table>
                                 </div>

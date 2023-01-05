@@ -165,3 +165,84 @@ if(isset($_POST['ass_farm'])) {
     }
     
 }
+
+// start farmer onboardfarmer
+if(isset($_POST['onboardfarmer']))
+{
+    $unique_id ='RASH/FARMER/'.substr(date("Y"), -2).'/'.rand(0000, 9999);
+    $unique_id = strtoupper($unique_id);
+    $email = mysqli_real_escape_string($dbconnect, $_POST['email']);
+    $first_name = mysqli_real_escape_string($dbconnect, $_POST['first_name']);
+    $last_name = mysqli_real_escape_string($dbconnect, $_POST['last_name']);
+    $phone_number = mysqli_real_escape_string($dbconnect, $_POST['phone_number']);
+    $date_of_birth = mysqli_real_escape_string($dbconnect, $_POST['date_of_birth']);
+    $gender = mysqli_real_escape_string($dbconnect, $_POST['gender']);
+    $disability = mysqli_real_escape_string($dbconnect, $_POST['disability']);
+    $marital_status = mysqli_real_escape_string($dbconnect, $_POST['marital_status']);
+    $did_you_have_children = mysqli_real_escape_string($dbconnect, $_POST['did_you_have_children']);
+    $numbers_of_children = mysqli_real_escape_string($dbconnect, $_POST['numbers_of_children']);
+    $is_children_in_school = mysqli_real_escape_string($dbconnect, $_POST['is_children_in_school']);
+    $average_monthly_income = mysqli_real_escape_string($dbconnect, $_POST['average_monthly_income']);
+    $other_income = mysqli_real_escape_string($dbconnect, $_POST['other_income']);
+    $land_size = mysqli_real_escape_string($dbconnect, $_POST['land_size']);
+    $farm_location = mysqli_real_escape_string($dbconnect, $_POST['farm_location']);
+    $home_address = mysqli_real_escape_string($dbconnect, $_POST['home_address']);
+    $state_of_origin = mysqli_real_escape_string($dbconnect, $_POST['state_of_origin']);
+    $nationality = mysqli_real_escape_string($dbconnect, $_POST['nationality']);
+    // $commitment_fee = mysqli_real_escape_string($dbconnect, $_POST['commitment_fee']);
+    // $reciept_of_commitment = mysqli_real_escape_string($dbconnect, $_POST['reciept_of_commitment']);
+
+    $land_picture = $_FILES['land_picture'];
+    $profile_picture = $_FILES['profile_picture'];
+    $national_means_of_identity = $_FILES['national_means_of_identity'];
+    $reciept_of_commitment = $_FILES['reciept_of_commitment'];
+
+
+    $farmer_profile_pic = $profile_picture['tmp_name']; // get the temporary location of the file
+    // get the file extension
+    $farmer_profile_pic_ext = explode('.', $profile_picture['name']);
+    $farmer_profile_pic_ext = strtolower(end($farmer_profile_pic_ext));
+    $farmer_profile_pic_name = uniqid('', true).'.'.$farmer_profile_pic_ext;
+    $farmer_profile_pic_destination = '../uploads/farmers/'.$farmer_profile_pic_name;
+    move_uploaded_file($farmer_profile_pic, $farmer_profile_pic_destination);
+
+    $farmer_land_pic = $land_picture['tmp_name']; // get the temporary location of the file
+    // get the file extension
+    $farmer_land_pic_ext = explode('.', $land_picture['name']);
+    $farmer_land_pic_ext = strtolower(end($farmer_land_pic_ext));
+    $farmer_land_pic_name = uniqid('', true).'.'.$farmer_land_pic_ext;
+    $farmer_land_pic_destination = '../uploads/farmers/'.$farmer_land_pic_name;
+    move_uploaded_file($farmer_land_pic, $farmer_land_pic_destination);
+
+    $farmer_national_means_of_identity = $national_means_of_identity['tmp_name']; // get the temporary location of the file
+    // get the file extension
+    $farmer_national_means_of_identity_ext = explode('.', $national_means_of_identity['name']);
+    $farmer_national_means_of_identity_ext = strtolower(end($farmer_national_means_of_identity_ext));
+    $farmer_national_means_of_identity_name = uniqid('', true).'.'.$farmer_national_means_of_identity_ext;
+    $farmer_national_means_of_identity_destination = '../uploads/farmers/'.$farmer_national_means_of_identity_name;
+    move_uploaded_file($farmer_national_means_of_identity, $farmer_national_means_of_identity_destination);
+
+    $farmer_reciept_of_commitment = $reciept_of_commitment['tmp_name']; // get the temporary location of the file
+    // get the file extension
+    $farmer_reciept_of_commitment_ext = explode('.', $reciept_of_commitment['name']);
+    $farmer_reciept_of_commitment_ext = strtolower(end($farmer_reciept_of_commitment_ext));
+    $farmer_reciept_of_commitment_name = uniqid('', true).'.'.$farmer_reciept_of_commitment_ext;
+    $farmer_reciept_of_commitment_destination = '../uploads/farmers/'.$farmer_reciept_of_commitment_name;
+    move_uploaded_file($farmer_reciept_of_commitment, $farmer_reciept_of_commitment_destination);
+
+
+    $start_check_list = "INSERT INTO farmer_check_lists(farmer_id) VALUES ('$unique_id')";
+    $start_check_list_query = mysqli_query($dbconnect, $start_check_list);
+    
+
+    $onboardfarmer = "INSERT INTO farmers(unique_id, email, first_name, last_name, phone_number, date_of_birth, gender, disability, marital_status, did_you_have_children, numbers_of_children, is_children_in_school, average_monthly_income, other_income, land_size, land_picture, upload_profile_picture, farm_location, home_address, state_of_origin, nationality, national_means_of_identity, commitment_fee, reciept_of_commitment) 
+    VALUES ('$unique_id', '$email', '$first_name', '$last_name', '$phone_number', '$date_of_birth', '$gender', '$disability', '$marital_status', '$did_you_have_children', '$numbers_of_children', '$is_children_in_school', '$average_monthly_income', '$other_income', '$land_size', '$farmer_land_pic_destination', '$farmer_profile_pic_destination', '$farm_location', '$home_address', '$state_of_origin', '$nationality', '$farmer_national_means_of_identity_destination', '$commitment_fee', '$farmer_reciept_of_commitment_destination')";
+    $result = mysqli_query($dbconnect, $onboardfarmer);
+    if ($result) {
+        header('location: ../farmers.php?type=success&msg=Farmer onboarded successfully');
+        exit();
+    } else {
+        header('location: ../farmers.php?type=error&msg=Error onboarding farmer');
+        exit();
+    }
+}

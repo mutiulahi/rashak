@@ -48,7 +48,7 @@ if (isset($_GET['farm_id'])) {
 }
 
 // get farmer 
-$sql_farmers = "SELECT * FROM users WHERE role_id = '3'";
+$sql_farmers = "SELECT * FROM farmers";
 $resultFarmers = mysqli_query($dbconnect, $sql_farmers);
 $farmers = mysqli_num_rows($resultFarmers);
 

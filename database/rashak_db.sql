@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2022 at 01:52 PM
+-- Generation Time: Jan 05, 2023 at 07:12 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -24,6 +24,78 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `farmers`
+--
+
+CREATE TABLE `farmers` (
+  `id` int(11) NOT NULL,
+  `unique_id` varchar(100) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `phone_number` varchar(100) NOT NULL,
+  `date_of_birth` varchar(100) NOT NULL,
+  `gender` varchar(100) NOT NULL,
+  `disability` varchar(100) NOT NULL,
+  `marital_status` varchar(100) NOT NULL,
+  `did_you_have_children` varchar(150) NOT NULL,
+  `numbers_of_children` varchar(100) NOT NULL,
+  `is_children_in_school` varchar(100) NOT NULL,
+  `average_monthly_income` varchar(100) NOT NULL,
+  `other_income` varchar(100) NOT NULL,
+  `land_size` varchar(400) NOT NULL,
+  `land_picture` varchar(400) NOT NULL,
+  `upload_profile_picture` varchar(300) NOT NULL,
+  `farm_location` varchar(200) NOT NULL,
+  `home_address` varchar(200) NOT NULL,
+  `state_of_origin` varchar(100) NOT NULL,
+  `nationality` varchar(300) NOT NULL,
+  `national_means_of_identity` varchar(400) NOT NULL,
+  `commitment_fee` varchar(200) NOT NULL,
+  `reciept_of_commitment` varchar(400) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `farmers`
+--
+
+INSERT INTO `farmers` (`id`, `unique_id`, `email`, `first_name`, `last_name`, `phone_number`, `date_of_birth`, `gender`, `disability`, `marital_status`, `did_you_have_children`, `numbers_of_children`, `is_children_in_school`, `average_monthly_income`, `other_income`, `land_size`, `land_picture`, `upload_profile_picture`, `farm_location`, `home_address`, `state_of_origin`, `nationality`, `national_means_of_identity`, `commitment_fee`, `reciept_of_commitment`) VALUES
+(1, 'RASH/FARMER/23/6403', '', 'Denis', 'Wisoky', '816-414-0198', '2023-05-18 00:36:48', 'Female', 'Yes', 'Married', 'No', '124', 'Yes public school', 'Est aliquam qui et.', '', 'Et veniam consectetur mollitia et dignissimos enim quasi rerum labore.', '', '', '', '43869 Harvey Trace', 'New Hampshire', 'Djibouti', '', '', ''),
+(2, 'RASH/FARMER/23/9963', 'your.email+fakedata30103@gmail.com', 'Constance', 'Dietrich', '251-638-5946', '2023-02-24 08:55:51', 'Male', 'No', 'Divorced', 'No', '342', 'No not in school', 'Exercitationem nobis enim est aut dolores.', 'Osun', 'Nihil ab dolorem alias consequatur quia aut est.', 'Array', '', '', '76325 Turcotte Rapids', 'Arkansas', 'Algeria', 'Array', '', 'Array'),
+(3, 'RASH/FARMER/23/4615', 'your.email+fakedata49197@gmail.com', 'Tina', 'Mills', '111-633-9244', '2023-02-17 03:15:35', 'Male', 'No', 'Married', 'Yes', '257', 'Yes private school', 'Accusamus minus et nobis voluptatem.', '', 'Asperiores aut laboriosam aliquam modi possimus magnam molestiae.', '../uploads/farmers/63b6272f88cd46.44102459.docx', '../uploads/farmers/63b6272f886972.64838180.docx', 'Minna', '295 Cordie Field', 'North Dakota', 'Cayman Islands', '../uploads/farmers/63b6272f8959e6.51401535.jpg', '', '../uploads/farmers/63b6272f89b297.91711143.docx'),
+(4, 'RASH/FARMER/23/4317', 'your.email+fakedata54012@gmail.com', 'Helga', 'Padberg', '953-802-9028', '2023-05-19 15:16:55', 'Female', 'Yes', 'Single', 'Yes', '643', 'Yes public school', 'Quis qui iste repudiandae deserunt quisquam aut harum quo quo.', '', 'Qui dolor dolore dolorem id.', '../uploads/farmers/63b6679a755fa3.19244490.', '../uploads/farmers/63b6679a755ee8.40191398.', '', '2221 Theresa Light', 'Illinois', 'Pakistan', '../uploads/farmers/63b6679a756010.15641054.', '', '../uploads/farmers/63b6679a756075.38021657.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `farmer_check_lists`
+--
+
+CREATE TABLE `farmer_check_lists` (
+  `id` int(11) NOT NULL,
+  `farmer_id` varchar(100) NOT NULL,
+  `training` varchar(20) DEFAULT NULL,
+  `land_preparation` varchar(20) DEFAULT NULL,
+  `receiveid_input` varchar(20) DEFAULT NULL,
+  `pre_emerg_herbicide_app` varchar(20) DEFAULT NULL,
+  `planted` varchar(20) DEFAULT NULL,
+  `post_emerg_herbicide_app` varchar(20) DEFAULT NULL,
+  `fertilized` varchar(20) DEFAULT NULL,
+  `harvest` varchar(20) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `farmer_check_lists`
+--
+
+INSERT INTO `farmer_check_lists` (`id`, `farmer_id`, `training`, `land_preparation`, `receiveid_input`, `pre_emerg_herbicide_app`, `planted`, `post_emerg_herbicide_app`, `fertilized`, `harvest`, `created_at`, `updated_at`) VALUES
+(1, 'RASH/FARMER/23/4317', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-01-05 06:00:58', '2023-01-05 06:00:58');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `farm_activities`
 --
 
@@ -36,18 +108,6 @@ CREATE TABLE `farm_activities` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` int(10) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `farm_activities`
---
-
-INSERT INTO `farm_activities` (`id`, `farm_id`, `activity`, `start_date`, `end_date`, `created_at`, `status`) VALUES
-(1, 2, 'dfgdfg', '2022-11-16', '2022-11-22', '2022-11-17 19:12:04', 0),
-(2, 4, 'Spraying', '2022-11-16', '2022-11-30', '2022-11-17 19:28:43', 1),
-(3, 4, 'Planting Potato', '2022-11-15', '2022-11-15', '2022-11-17 19:30:49', 1),
-(4, 3, 'Spraying', '2022-11-21', '2022-11-28', '2022-11-17 19:51:29', 1),
-(5, 1, 'Spraying', '2022-11-17', '2022-11-20', '2022-11-17 20:05:00', 1),
-(6, 1, 'Planting Potato', '2022-11-14', '2022-11-30', '2022-11-17 20:11:08', 1);
 
 -- --------------------------------------------------------
 
@@ -78,16 +138,6 @@ CREATE TABLE `farm_details` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `farm_details`
---
-
-INSERT INTO `farm_details` (`id`, `name`, `location`, `picture`, `size`, `farm_description`, `created_at`) VALUES
-(1, 'kerkj', 'rjerjker', '', 'jrkj', 'fjjjj', '2022-11-17 09:16:46'),
-(2, 'ooola', 'djhjh', '', 'jjdfkjk', 'ndmnmnmndfdf', '2022-11-17 09:20:06'),
-(3, 'Farm A', 'ILE GBO', '', '20 achars', 'Computer farm', '2022-11-17 10:54:53'),
-(4, 'Aibinu Farm', 'Minna', '', '20 ', 'Okay firm', '2022-11-17 19:28:08');
-
 -- --------------------------------------------------------
 
 --
@@ -100,15 +150,6 @@ CREATE TABLE `farm_users` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `farm_users`
---
-
-INSERT INTO `farm_users` (`id`, `farm_id`, `user_id`) VALUES
-(9, 1, 3),
-(10, 2, 4),
-(11, 4, 7);
-
 -- --------------------------------------------------------
 
 --
@@ -120,7 +161,7 @@ CREATE TABLE `users` (
   `name` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
   `password` varchar(250) NOT NULL,
-  `role_id` varchar(20) NOT NULL,
+  `role_id` varchar(20) NOT NULL COMMENT '1=admin, 2=supervisor, 3=>farmers',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -142,6 +183,19 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `role_id`, `created_at`)
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `farmers`
+--
+ALTER TABLE `farmers`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_id` (`unique_id`);
+
+--
+-- Indexes for table `farmer_check_lists`
+--
+ALTER TABLE `farmer_check_lists`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `farm_activities`
@@ -178,10 +232,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `farmers`
+--
+ALTER TABLE `farmers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `farmer_check_lists`
+--
+ALTER TABLE `farmer_check_lists`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `farm_activities`
 --
 ALTER TABLE `farm_activities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `farm_comments`
@@ -193,13 +259,13 @@ ALTER TABLE `farm_comments`
 -- AUTO_INCREMENT for table `farm_details`
 --
 ALTER TABLE `farm_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `farm_users`
 --
 ALTER TABLE `farm_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`

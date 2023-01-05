@@ -8,7 +8,7 @@ include "includes/config.php";
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Farms</title>
+    <title>Farmers</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
 
     <!-- project css file  -->
@@ -35,9 +35,10 @@ include "includes/config.php";
                             <div class="card-header p-0 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                                 <h3 class="fw-bold py-3 mb-0">Farmers</h3>
                                 <div class="d-flex py-2 project-tab flex-wrap w-sm-100">
-                                <?php if($_SESSION['id'] == 4) { ?>
-                                        <button type="button" class="btn btn-dark w-sm-100"  data-bs-target="#createproject"><i class="icofont-plus-circle me-2 fs-6"></i>Add Farmer</button>                                
-                                        <?php } ?>
+                                    <?php if ($_SESSION['id'] == 4) { ?>
+                                        <!-- <button type="button" class="btn btn-dark w-sm-100"  data-bs-target="#createproject"><i class="icofont-plus-circle me-2 fs-6"></i>Add Farmer</button>                                 -->
+                                        <a href="onboardfarmers.php" type="a" class="btn btn-dark w-sm-100" data-bs-target="#createproject"><i class="icofont-plus-circle me-2 fs-6"></i>Add Farmer</a>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -46,6 +47,14 @@ include "includes/config.php";
                         <div class="col-sm-12">
                             <div class="card mb-3">
                                 <div class="card-body">
+                                    <!-- alart -->
+                                    <?php
+                                    if (isset($_GET['type']) && $_GET['type'] == 'success') {
+                                        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>Success!</strong> ' . $_GET['msg'] . '
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>';
+                                    } ?>
                                     <table id="myProjectTable" class="table table-hover align-middle mb-0" style="width:100%">
                                         <thead>
                                             <tr>
@@ -59,10 +68,10 @@ include "includes/config.php";
                                             <?php
                                             if (isset($farmers) and $farmers > 0) {
                                                 while ($FarmersRow = mysqli_fetch_array($resultFarmers)) {
-                                                    $id = $FarmersRow['id'];
-                                                    $name = $FarmersRow['name'];
+                                                    $id = $FarmersRow['unique_id'];
+                                                    $name = $FarmersRow['last_name'] . ' ' . $FarmersRow['first_name'];
                                                     $email = $FarmersRow['email'];
-                                                    $created_at = $FarmersRow['created_at'];
+                                                    $created_at = 'kk';
                                             ?>
                                                     <tr>
                                                         <td><?php echo $id; ?></td>
@@ -70,14 +79,14 @@ include "includes/config.php";
                                                         <td><?php echo $email; ?></td>
                                                         <td>
                                                             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editproject<?php echo 
-                                                                 $id; ?>"><i class="icofont-edit text-success"></i></button>
-                                                                <button type="button" class="btn btn-outline-secondary deleterow"><i class="icofont-ui-delete text-danger"></i> 
-                                                             </button>
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editproject<?php echo substr($id, -4); ?>"><i class="icofont-edit text-success"></i></button>
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#checklist<?php echo substr($id, -4); ?>"><i class="icofont-check text-primary"></i></button>
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#details<?php echo substr($id, -4); ?>"><i class="fa fa-eye text-primary"></i></button>
+                                                                <button type="button" class="btn btn-outline-secondary deleterow"><i class="icofont-ui-delete text-danger"></i></button>
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <div class="modal fade" id="editproject<?php echo $id ?>" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal fade" id="editproject<?php echo substr($id, -4); ?>" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -92,12 +101,10 @@ include "includes/config.php";
                                                                             <div class="row g-3 mb-3">
                                                                                 <div class="col-sm-12">
                                                                                     <label class="form-label">Name</label>
-                                                                                    <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" 
-                                                                                     id="exampleFormControlInput77" placeholder="Fullname">
+                                                                                    <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" id="exampleFormControlInput77" placeholder="Fullname">
                                                                                     <div class="col-sm-12">
                                                                                         <label for="formFileMultipleone" class="form-label">Email</label>
-                                                                                        <input class="form-control" type="email" value="<?php echo $email; ?>" name="email" 
-                                                                                         id="formFileMultipleone" multiple>
+                                                                                        <input class="form-control" type="email" value="<?php echo $email; ?>" name="email" id="formFileMultipleone" multiple>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -106,6 +113,53 @@ include "includes/config.php";
                                                                             <button type="submit" name="edit_user" class="btn btn-primary">Submit</button>
                                                                         </div>
                                                                     </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- check list -->
+                                                    <div class="modal fade" id="checklist<?php echo substr($id, -4); ?>" tabindex="-1" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title  fw-bold" id="editprojectLabel">Farmar's Check List</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form action="includes/process.php" method="post">
+                                                                        <input type="hidden" class="form-control" name="redirect" value="farmers.php">
+                                                                        <input type="hidden" class="form-control" name="id" value="<?php echo $id ?>">
+                                                                        <div class="deadline-form">
+                                                                            <div class="row g-3 mb-3">
+                                                                                <div class="col-sm-12">
+                                                                                    <label class="form-label">Name</label>
+                                                                                    <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" id="exampleFormControlInput77" placeholder="Fullname">
+                                                                                    <div class="col-sm-12">
+                                                                                        <label for="formFileMultipleone" class="form-label">Email</label>
+                                                                                        <input class="form-control" type="email" value="<?php echo $email; ?>" name="email" id="formFileMultipleone" multiple>
+                                                                                    </div> 
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="submit" name="edit_user" class="btn btn-primary">Submit</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- details -->
+                                                    <div class="modal fade" id="details<?php echo substr($id, -4); ?>" tabindex="-1" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title  fw-bold" id="editprojectLabel">Farmer Info Details</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -280,8 +334,8 @@ include "includes/config.php";
                                                 <input class="form-control" type="email" name="email" name="Enter you email" id="formFileMultipleone" required>
                                             </div>
                                             <!-- <div class="col-sm-12"> -->
-                                                <!-- <label for="formFileMultipleone" class="form-label">Password</label> -->
-                                                <input class="form-control" type="hidden" value="okay"  name="password" id="formFileMultipleone" required>
+                                            <!-- <label for="formFileMultipleone" class="form-label">Password</label> -->
+                                            <input class="form-control" type="hidden" value="okay" name="password" id="formFileMultipleone" required>
                                             <!-- </div> -->
                                         </div>
                                     </div>

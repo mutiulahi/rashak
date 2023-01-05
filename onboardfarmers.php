@@ -8,7 +8,7 @@ include "includes/config.php";
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Farms</title>
+    <title>Add Farmers | Rashak</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
 
     <!-- project css file  -->
@@ -47,113 +47,147 @@ include "includes/config.php";
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <div class="container">
-                                        <form action="" method="post">
+                                        <form action="includes/process.php" method="post" enctype="multipart/form-data">
                                             <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">First Name</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter First Name">
+                                                <h4 class="text-primary" style="font-weight: 600;">Farmer Details</h4><br><br><br>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Email</label>
+                                                    <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter your Email">
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">First Name</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" name="first_name" aria-describedby="emailHelp" placeholder="Enter First Name">
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Last Name</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="last_name" placeholder="Enter Last Name">
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Phone Number</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="phone_number" placeholder="Enter Phone Number">
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Date Of Birth</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="date_of_birth" placeholder="Enter Date Of Birth">
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Gender</label>
+                                                    <select name="gender" id="" class="form-control">
+                                                        <option>Select your gender</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="form-label">Disability</label>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="disability" id="exampleRadios11" value="Yes">
+                                                                <label class="form-check-label" for="exampleRadios11"> Yes</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="disability" id="exampleRadios22" value="No">
+                                                                <label class="form-check-label" for="exampleRadios22">No </label>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">Last Name</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="last_name" placeholder="Enter Last Name">
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Marital Status</label>
+                                                    <select name="marital_status" class="form-control" id="">
+                                                        <option>Select marital status</option>
+                                                        <option value="Single">Single</option>
+                                                        <option value="Married">Married</option>
+                                                        <option value="Divorced">Divorced</option>
+                                                        <option value="Widowed">Widowed</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 form-group col-md-6 mb-4">
+                                                    <label class="form-label">Do you have children</label>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="did_you_have_children" id="exampleRadios11" value="Yes">
+                                                                <label class="form-check-label" for="exampleRadios11"> Yes</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="did_you_have_children" id="exampleRadios22" value="No">
+                                                                <label class="form-check-label" for="exampleRadios22">No </label>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">Phone Number</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="phone_number" placeholder="Enter Phone Number">
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">Date Of Birth</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="date_of_birth" placeholder="Enter Date Of Birth">
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">Gender</label>
-                                                        <select name="gender" id="">
-                                                            <option value="Male">Male</option>
-                                                            <option value="Female">Female</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">Disability</label>
-                                                        <input type="radio" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="disability">Yes 
-                                                        <input type="radio" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="disability">No
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">Marital Status</label>
-                                                        <select name="marital_status" id="">
-                                                            <option value="Single">Single</option>
-                                                            <option value="Married">Married</option>
-                                                            <option value="Divorced">Divorced</option>
-                                                            <option value="Widowed">Widowed</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">Do ypu have children</label>
-                                                        <input type="radio" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="disabl">Yes 
-                                                        <input type="radio" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="disabl">No
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">Numbers of Children</label>
-                                                        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="numbers_of_children" placeholder="Numbers of Children">
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">Are your children enrolled in school</label>
-                                                        <select name="" id="">
-                                                            <option value="">Yes-Private school</option>
-                                                            <option value="">Yes-Public school</option>
-                                                            <option value="">No</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">Average monthly income</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="average_monthly_income" placeholder="Enter average montly income">
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">Do you have any other source of income apart from agriculture?</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="any_source_of_income_apart_from_agriculture" placeholder="Do you have any other source of income apart from agriculture?">
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">Land size</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="land_size" placeholder="Enter Land size">
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">Land picture</label>
-                                                        <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="land_picture" placeholder="upload land picture">
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">Upload Profile picture</label>
-                                                        <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="upload_profile_picture" placeholder="Upload profile Picture">
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">Home Address</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-   zdescribedby="emailHelp" name="home_address" placeholder="Enter Home Address">
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">Farm location</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="farm_location" placeholder="Enter Farm location">
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">State of origin</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="state_of_origin" placeholder="Enter state of origin">
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">Natonality</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nationality" placeholder="Enter name of Country">
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">Upload National means of identity</label>
-                                                        <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="upload_national_means_of_identity" placeholder="Upload National means of identity">
-                                                    </div>
-                                                    <div class="form-group mb-4">
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Numbers of Children</label>
+                                                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="numbers_of_children" placeholder="Numbers of Children">
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Are your children enrolled in school</label>
+                                                    <select name="is_children_in_school" class="form-control" id="">
+                                                        <option>Select your option</option>
+                                                        <option value="Yes private school">Yes private school</option>
+                                                        <option value="Yes public school">Yes public school</option>
+                                                        <option value="No not in school">No</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Average monthly income (₦)</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="average_monthly_income" placeholder="Enter average montly income">
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Any source of income apart from agriculture? If yes state it here</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="other_income" placeholder="Do you have any other source of income apart from agriculture?">
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Land size</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="land_size" placeholder="Enter Land size">
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Land picture</label>
+                                                    <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="land_picture" placeholder="upload land picture">
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Upload your profile picture</label>
+                                                    <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="profile_picture" placeholder="Upload profile Picture">
+                                                </div>
+
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Farm location</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="farm_location" placeholder="Enter Farm location">
+                                                </div>
+
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Home address</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" aria- zdescribedby="emailHelp" name="home_address" placeholder="Enter Home Address">
+                                                </div>
+
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">State of origin</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="state_of_origin" placeholder="Enter state of origin">
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Natonality</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nationality" placeholder="Enter name of Country">
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Upload National means of identity</label>
+                                                    <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="national_means_of_identity" placeholder="Upload National means of identity">
+                                                </div>
+                                                <!-- <div class="form-group col-md-6 mb-4">
                                                         <label class="mb-2" for="exampleInputEmail1">Commitment Fee</label>
                                                         <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="commitment_fee" placeholder="">
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="mb-2" for="exampleInputEmail1">Resciept of commitment Fee</label>
-                                                        <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="reciept_of_commitment" placeholder="Upload commitment fee reciept">
-                                                    </div>
-                                                    <button class="btn-primary"> <input type="submit" name="submit"> Submit</button>
+                                                    </div> -->
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Resciept of commitment Fee</label>
+                                                    <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="reciept_of_commitment" placeholder="Upload commitment fee reciept">
                                                 </div>
+                                                <button class="btn btn-primary" name="onboardfarmer"> Submit</button>
+                                                <!-- </div> -->
                                             </div>
                                         </form>
                                     </div>

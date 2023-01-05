@@ -73,6 +73,24 @@ include "includes/config.php";
                                                     $email = $FarmersRow['email'];
                                                     $phone = $FarmersRow['phone_number'];
                                                     $date_of_birth = $FarmersRow['date_of_birth'];
+                                                    $gender = $FarmersRow['gender'];
+                                                    $disability = $FarmersRow['disability'];
+                                                    $marital_status = $FarmersRow['marital_status'];
+                                                    $have_children = $FarmersRow['did_you_have_children'];
+                                                    $numbers_of_children = $FarmersRow['numbers_of_children'];
+                                                    $is_children_in_school = $FarmersRow['is_children_in_school'];
+                                                    $average_monthly_income = $FarmersRow['average_monthly_income'];
+                                                    $other_income = $FarmersRow['other_income'];
+                                                    $land_size = $FarmersRow['land_size'];
+                                                    $land_picture = $FarmersRow['land_picture'];
+                                                    $upload_profile_picture = $FarmersRow['upload_profile_picture'];
+                                                    $farm_location = $FarmersRow['farm_location'];
+                                                    $home_address = $FarmersRow['home_address'];
+                                                    $state_of_origin = $FarmersRow['state_of_origin'];
+                                                    $nationality = $FarmersRow['nationality'];
+                                                    $national_means_of_identity = $FarmersRow['national_means_of_identity'];
+                                                    $commitment_fee = $FarmersRow['commitment_fee'];
+                                                    $reciept_of_commitment = $FarmersRow['reciept_of_commitment'];
                                             ?>
                                                     <tr>
                                                         <td><?php echo $id; ?></td>

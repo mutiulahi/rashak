@@ -133,17 +133,45 @@ include "includes/config.php";
                                                                         <div class="deadline-form">
                                                                             <div class="row g-3 mb-3">
                                                                                 <div class="col-sm-12">
-                                                                                    <label class="form-label">Name</label>
-                                                                                    <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" id="exampleFormControlInput77" placeholder="Fullname">
+                                                                                    <?php
+                                                                                    $sql = "SELECT * FROM farmer_check_lists WHERE farmer_id = '$id'";
+                                                                                    $result = mysqli_query($dbconnect, $sql);
+                                                                                    while ($result_data =  mysqli_fetch_array($result)) {
+                                                                                        $training = $result_data['training'];
+                                                                                        $land_preparation = $result_data['land_preparation'];
+                                                                                        $receiveid_input = $result_data['receiveid_input'];
+                                                                                        $pre_emerg_herbicide = $result_data['pre_emerg_herbicide_app'];
+                                                                                        $planted = $result_data['planted'];
+                                                                                        $post_emerg_herbicide = $result_data['post_emerg_herbicide_app'];
+                                                                                        $fertilized = $result_data['fertilized'];
+                                                                                        $harvest = $result_data['harvest'];
+                                                                                    }
+                                                                                    ?>
                                                                                     <div class="col-sm-12">
-                                                                                        <label for="formFileMultipleone" class="form-label">Email</label>
-                                                                                        <input class="form-control" type="email" value="<?php echo $email; ?>" name="email" id="formFileMultipleone" multiple>
-                                                                                    </div> 
+                                                                                        <div class="form-check">
+                                                                                            <input class="form-check-input" type="checkbox" name="training" id="exampleRadios11" value="Yes">
+                                                                                            <label class="form-check-label" for="exampleRadios11">Training</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-sm-12">
+                                                                                        <div class="form-check">
+                                                                                            <input class="form-check-input" type="checkbox" name="land_preparation" id="exampleRadios11" value="Yes">
+                                                                                            <label class="form-check-label" for="exampleRadios11">Land preparation</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-sm-12">
+                                                                                        <label for="formFileMultipleone" class="form-label">Received input date</label>
+                                                                                        <input type="date" class="form-control" name="received_input" id="">
+                                                                                    </div>
+                                                                                    <div class="col-sm-12">
+                                                                                        <label for="formFileMultipleone" class="form-label">Planted date</label>
+                                                                                        <input type="date" class="form-control" name="planted" id="">
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="submit" name="edit_user" class="btn btn-primary">Submit</button>
+                                                                            <button type="submit" name="check_list" class="btn btn-primary">Submit</button>
                                                                         </div>
                                                                     </form>
                                                                 </div>
@@ -179,13 +207,13 @@ include "includes/config.php";
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                            <?php
-                                                }
-                                            } ?>
+                                                        <?php
+                                                    }
+                                                } ?>
                                         </tbody>
                                     </table>
                                 </div>

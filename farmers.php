@@ -314,16 +314,68 @@ include "includes/config.php";
                                                                                                         <span class="text-muted fw-bold"><?php echo $marital_status; ?></span>
                                                                                                     </div>
                                                                                                     <div class="mb-3">
-                                                                                                        <label for="formFileMultipleone" class="form-label">Marital Status</label>
-                                                                                                        <span class="text-muted fw-bold"><?php echo $marital_status; ?></span>
+                                                                                                        <label for="formFileMultipleone" class="form-label">Do you have children</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $have_children; ?></span>
                                                                                                     </div>
                                                                                                     <div class="mb-3">
-                                                                                                        <label for="formFileMultipleone" class="form-label">Marital Status</label>
-                                                                                                        <span class="text-muted fw-bold"><?php echo $marital_status; ?></span>
+                                                                                                        <label for="formFileMultipleone" class="form-label">Number of Children </label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $numbers_of_children; ?></span>
                                                                                                     </div>
                                                                                                     <div class="mb-3">
-                                                                                                        <label for="formFileMultipleone" class="form-label">Marital Status</label>
-                                                                                                        <span class="text-muted fw-bold"><?php echo $marital_status; ?></span>
+                                                                                                        <label for="formFileMultipleone" class="form-label">Are your children enrolled in school</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $is_children_in_school; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Average monthly income</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $average_monthly_income; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Do you have any other source of income apart from agriculture</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $other_income; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Land Size</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $land_size; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Land coordinate</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $land_coordinate; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Land picture</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $land_picture; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Upload Profile photo</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $upload_profile_picture; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Home address</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $home_address; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Farm location</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $farm_location; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">State of origin</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $state_of_origin; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Nationality</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $nationality; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Upload national means of identification</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $national_means_of_identity; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Commitment fee</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $commitment_fee; ?></span>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <label for="formFileMultipleone" class="form-label">Receipt of commitment fee</label>
+                                                                                                        <span class="text-muted fw-bold"><?php echo $reciept_of_commitment; ?></span>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>

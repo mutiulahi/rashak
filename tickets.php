@@ -5,8 +5,6 @@ include "includes/config.php";
 <html class="no-js" lang="en" dir="ltr">
 
 
-<!-- Mirrored from www.pixelwibes.com/template/my-task/html/dist/tickets.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Nov 2022 12:09:21 GMT -->
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -65,31 +63,74 @@ include "includes/config.php";
                                             <?php
                                             if (isset($farm_Activity_num) and $farm_Activity_num > 0 and isset($_GET['farm_id'])) {
                                                 while ($farmActivity = mysqli_fetch_array($resultActivity)) {
-                                                    $farmActivity_id = $farmActivity['id'];
-                                                    $activity = $farmActivity['activity'];
-                                                    $farmActivity_starting_date = $farmActivity['start_date'];
-                                                    $farmActivity_ending_date = $farmActivity['end_date'];
-                                                    $farmActivity_status = $farmActivity['status'];
-                                                    $farmActivity_created_at = $farmActivity['created_at'];
-                                                    if ($farmActivity_status == 1) {
-                                                        $farmActivity_status = "Active";
-                                                    } else {
-                                                        $farmActivity_status = "Inactive";
-                                                    }
+                                                    $farm_id = $farmActivity['farm_id'];
+                                                    $crop = $farmActivity['crop'];
+                                                    $harvest_date = $farmActivity['harvest_date'];
+                                                    $total_yield = $farmActivity['total_yield'];
+                                                    $warehouse_to_be_delivered_to = $farmActivity['warehouse_to_be_delivered_to'];
+                                                    $created_at = $farmActivity['created_at'];
+                                                    
                                             ?>
                                                     <tr>
-                                                        <td><?php echo $farmActivity_id; ?></td>
-                                                        <td><?php echo $activity; ?></td>
-                                                        <td><?php echo $farmActivity_starting_date; ?></td>
-                                                        <td><?php echo $farmActivity_ending_date; ?></td>
-                                                        <td><span class="badge bg-success"><?php echo $farmActivity_status; ?></span></td>
+                                                        <td><?php echo $farm_id; ?></td>
+                                                        <td><?php echo $crop; ?></td>
+                                                        <td><?php echo $harvest_date; ?></td>
+                                                        <td><?php echo $total_yield; ?></td>
+                                                        <td><?php echo $warehouse_to_be_delivered_to; ?></td>
+                                                        <td><?php echo $created_at; ?></td>
+
                                                         <td>
                                                             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#edittickit"><i class="icofont-edit text-success"></i></button>
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#edittickit<?php echo substr($farm_id,-4); ?>"><i class="icofont-edit text-success"></i></button>
                                                                 <button type="button" class="btn btn-outline-secondary deleterow"><i class="icofont-ui-delete text-danger"></i></button>
                                                             </div>
                                                         </td>
                                                     </tr>
+                                                     <!-- Edit Tickit-->
+            <div class="modal fade" id="edittickit<?php echo substr($farm_id,-4); ?>" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title  fw-bold" id="leaveaddLabel">Edit Farm Hervest</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <?php if(isset($_GET['farm_id'])){
+
+                       ?>
+                        <form action="includes/process.php" method="post">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <input type="hidden" class="form-control" value="<?php echo $_GET['farm_id']; ?>" name="farm_id" id="sub">
+                                </div>
+                                            <div class="col-md-12 mb-3">
+                                                <label for="deptwo" class="form-label">Crop</label>
+                                                <input type="text" class="form-control" value="<?php echo $crop; ?>" name="crop" id="deptwo">
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <label for="deptwo" class="form-label">Harvest Date</label>
+                                                <input type="date" class="form-control" value="<?php echo $harvest_date; ?>" name="harvest_date" id="deptwo">
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <label for="deptwo" class="form-label">Total Yield</label>
+                                                <input type="number" class="form-control" value="<?php echo $total_yield; ?>" name="total_yield" id="deptwo">
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <label for="deptwo" class="form-label">Warehouse to be delivered to</label>
+                                                <input type="text" class="form-control" value="<?php echo $warehouse_to_be_delivered_to; ?>" name="warehouse_to_be_delivered_to" id="deptwo">
+                                            </div>
+                                      
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" name="harvest" class="btn btn-primary">Add</button>
+                            </div>
+                        </form>
+                        <?php }else{
+                            // alert("No farm selected") and redirect to farm page
+                            echo "<script>alert('Please select a farm');window.location.href='projects.php' </script>";
+                        } ?>
+                    </div>
+                </div>
+            </div>
                                             <?php
                                                 }
                                             } ?>
@@ -243,7 +284,7 @@ include "includes/config.php";
                 <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title  fw-bold" id="leaveaddLabel">Farm Activity</h5>
+                            <h5 class="modal-title  fw-bold" id="leaveaddLabel">Farm Hervest</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <?php if(isset($_GET['farm_id'])){
@@ -252,25 +293,28 @@ include "includes/config.php";
                         <form action="includes/process.php" method="post">
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="sub" class="form-label">Activity</label>
-                                    <input type="text" class="form-control" name="activity" id="sub">
                                     <input type="hidden" class="form-control" value="<?php echo $_GET['farm_id']; ?>" name="farm_id" id="sub">
                                 </div>
-                                <div class="deadline-form">
-                                        <div class="row g-3 mb-3">
-                                            <div class="col">
-                                                <label for="deptwo" class="form-label">Starting Date</label>
-                                                <input type="date" class="form-control" name="stating_date" id="deptwo">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="deptwo" class="form-label">Crop</label>
+                                                <input type="text" class="form-control" name="crop" id="deptwo">
                                             </div>
-                                            <div class="col">
-                                                <label for="deptwo" class="form-label">Expected Ending Date</label>
-                                                <input type="date" class="form-control" name="ending_date" id="deptwo">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="deptwo" class="form-label">Harvest Date</label>
+                                                <input type="date" class="form-control" name="harvest_date" id="deptwo">
                                             </div>
-                                        </div>
-                                </div>
+                                            <div class="col-md-12 mb-3">
+                                                <label for="deptwo" class="form-label">Total Yield</label>
+                                                <input type="number" class="form-control" name="total_yield" id="deptwo">
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <label for="deptwo" class="form-label">Warehouse to be delivered to</label>
+                                                <input type="text" class="form-control" name="warehouse_to_be_delivered_to" id="deptwo">
+                                            </div>
+                                      
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" name="farm_activity" class="btn btn-primary">Add</button>
+                                <button type="submit" name="harvest" class="btn btn-primary">Add</button>
                             </div>
                         </form>
                         <?php }else{
@@ -281,50 +325,7 @@ include "includes/config.php";
                 </div>
             </div>
 
-            <!-- Edit Tickit-->
-            <div class="modal fade" id="edittickit" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title  fw-bold" id="edittickitLabel"> Tickit Edit</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="sub1" class="form-label">Subject</label>
-                                <input type="text" class="form-control" id="sub1" value="punching time not proper">
-                            </div>
-                            <div class="deadline-form">
-                                <form>
-                                    <div class="row g-3 mb-3">
-                                        <div class="col">
-                                            <label for="depone11" class="form-label">Assign Name</label>
-                                            <input type="text" class="form-control" id="depone11" value="Victor Rampling">
-                                        </div>
-                                        <div class="col">
-                                            <label for="deptwo56" class="form-label">Creted Date</label>
-                                            <input type="date" class="form-control" id="deptwo56" value="2021-02-25">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Status</label>
-                                <select class="form-select">
-                                    <option selected>Completed</option>
-                                    <option value="1">In Progress</option>
-                                    <option value="2">Wating</option>
-                                    <option value="3">Decline</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done</button>
-                            <button type="submit" class="btn btn-primary">sent</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
         </div>
     </div>
 

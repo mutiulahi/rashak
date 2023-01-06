@@ -63,17 +63,17 @@ if (isset($_POST['add_farm'])) {
 }
 
 // add new farm activity
-if (isset($_POST['farm_activity'])) {
+if (isset($_POST['harvest'])) {
     // Get form data and store in variables also sanitize data
     $farm_id = mysqli_real_escape_string($dbconnect, $_POST['farm_id']);
-    $activity = mysqli_real_escape_string($dbconnect, $_POST['activity']);
-    $starting_date = mysqli_real_escape_string($dbconnect, $_POST['stating_date']);
-    $ending_date = mysqli_real_escape_string($dbconnect, $_POST['ending_date']);
-    $status = mysqli_real_escape_string($dbconnect, $_POST['status']);
+    $crop = mysqli_real_escape_string($dbconnect, $_POST['crop']);
+    $harvest_date = mysqli_real_escape_string($dbconnect, $_POST['harvest_date']);
+    $total_yield = mysqli_real_escape_string($dbconnect, $_POST['total_yield']);
+    $warehouse_to_be_delivered_to = mysqli_real_escape_string($dbconnect, $_POST['warehouse_to_be_delivered_to']);
     $status = 1;
 
     // insert to db in farm_details
-    $farm_activity = "INSERT INTO farm_activities (farm_id, activity, start_date, end_date, status) VALUES ('$farm_id', '$activity', '$starting_date', '$ending_date', '$status')";
+    $farm_activity = "INSERT INTO farm_activities (`farm_id`, `crop`, `harvest_date`, `total_yield`, `warehouse_to_be_delivered_to`) VALUES ('$farm_id', '$crop', '$harvest_date', '$total_yield', '$warehouse_to_be_delivered_to')";
     $result = mysqli_query($dbconnect, $farm_activity);
     if ($result) {
         header('location: ../tickets.php?farm_id=' . $farm_id . '&type=success&msg=Farm activity added successfully');

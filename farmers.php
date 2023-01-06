@@ -69,6 +69,7 @@ include "includes/config.php";
                                             <?php
                                             if (isset($farmers) and $farmers > 0) {
                                                 while ($FarmersRow = mysqli_fetch_array($resultFarmers)) {
+                                                    $id_id = $FarmersRow['id'];
                                                     $id = $FarmersRow['unique_id'];
                                                     $name = $FarmersRow['last_name'] . ' ' . $FarmersRow['first_name'];
                                                     $email = $FarmersRow['email'];
@@ -106,7 +107,7 @@ include "includes/config.php";
                                                                 <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#checklist<?php echo substr($id, -2); ?>">monitor field</button>
                                                                 <a href="tickets.php?farm_id=<?php echo $id; ?>" class="btn btn-outline-secondary">harvest</a>
                                                                 <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#details<?php echo substr($id, -2); ?>">view</button>
-                                                                <button type="button" class="btn btn-outline-secondary deleterow"><i class="icofont-ui-delete text-danger"></i></button>
+                                                                <button type="button" class="btn btn-outline-secondary deleterow" data-bs-toggle="modal" data-bs-target="#deleteproject<?php echo substr($id, -2); ?>"><i class="icofont-ui-delete text-danger"></i></button>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -123,7 +124,7 @@ include "includes/config.php";
                                                                             <h4 class="text-primary" style="font-weight: 600;">Farmer Details</h4><br><br><br>
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">Email</label>
-                                                                                <input type="email" class="form-control" id="exampleInputEmail1" name="email" value="<?php echo $email;?>" aria-describedby="emailHelp" placeholder="Enter your Email">
+                                                                                <input type="email" class="form-control" id="exampleInputEmail1" name="email" value="<?php echo $email; ?>" aria-describedby="emailHelp" placeholder="Enter your Email">
                                                                             </div>
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">First Name</label>
@@ -158,13 +159,17 @@ include "includes/config.php";
                                                                                 <div class="row">
                                                                                     <div class="col-md-4">
                                                                                         <div class="form-check">
-                                                                                            <input class="form-check-input" <?php if($disability == 'Yes') {echo 'checked';} ?> type="radio" name="disability" id="exampleRadios11" value="Yes">
+                                                                                            <input class="form-check-input" <?php if ($disability == 'Yes') {
+                                                                                                                                echo 'checked';
+                                                                                                                            } ?> type="radio" name="disability" id="exampleRadios11" value="Yes">
                                                                                             <label class="form-check-label" for="exampleRadios11"> Yes</label>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-md-4">
                                                                                         <div class="form-check">
-                                                                                            <input class="form-check-input" <?php if($disability == 'No') {echo 'checked';} ?> type="radio" name="disability" id="exampleRadios22" value="No">
+                                                                                            <input class="form-check-input" <?php if ($disability == 'No') {
+                                                                                                                                echo 'checked';
+                                                                                                                            } ?> type="radio" name="disability" id="exampleRadios22" value="No">
                                                                                             <label class="form-check-label" for="exampleRadios22">No </label>
                                                                                         </div>
                                                                                     </div>
@@ -174,7 +179,9 @@ include "includes/config.php";
                                                                                 <label class="mb-2" for="exampleInputEmail1">Marital Status</label>
                                                                                 <select name="marital_status" class="form-control" id="">
                                                                                     <option>Select marital status</option>
-                                                                                    <option <?php if($disability == 'Single') {echo 'selected';} ?> value="Single">Single</option>
+                                                                                    <option <?php if ($disability == 'Single') {
+                                                                                                echo 'selected';
+                                                                                            } ?> value="Single">Single</option>
                                                                                     <option value="Married">Married</option>
                                                                                     <option value="Divorced">Divorced</option>
                                                                                     <option value="Widowed">Widowed</option>
@@ -270,6 +277,31 @@ include "includes/config.php";
                                                         </div>
                                                     </div>
 
+                                                    <div class="modal fade" id="deleteproject<?php echo substr($id, -2); ?>" tabindex="-1" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title  fw-bold" id="deleteprojectLabel"> Delete <?php echo $name; ?> Permanently?</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <form action="includes/process.php" method="post">
+                                                                    <input type="hidden" name="id" value="<?php echo $id_id; ?>">
+                                                                    <input type="hidden" name="redirect" value="farmers">
+                                                                    <input type="hidden" name="table" value="farmers">
+                                                                    <div class="modal-body justify-content-center flex-column d-flex">
+                                                                        <i class="icofont-ui-delete text-danger display-2 text-center mt-2"></i>
+                                                                        <p class="mt-4 fs-5 text-center"> Are you sure of this Action </p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                        <button type="submit" name="delete" class="btn btn-danger text-white">Delete</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Edit Modal -->
                                                     <div class="modal fade" id="editproject<?php echo substr($id, -2); ?>" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
                                                             <div class="modal-content">
@@ -534,142 +566,6 @@ include "includes/config.php";
                 </div>
             </div>
 
-            <!-- Modal Members-->
-            <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title  fw-bold" id="addUserLabel">Employee Invitation</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="inviteby_email">
-                                <div class="input-group mb-3">
-                                    <input type="email" class="form-control" placeholder="Email address" id="exampleInputEmail1" aria-describedby="exampleInputEmail1">
-                                    <button class="btn btn-dark" type="button" id="button-addon2">Sent</button>
-                                </div>
-                            </div>
-                            <div class="members_list">
-                                <h6 class="fw-bold ">Employee </h6>
-                                <ul class="list-unstyled list-group list-group-custom list-group-flush mb-0">
-                                    <li class="list-group-item py-3 text-center text-md-start">
-                                        <div class="d-flex align-items-center flex-column flex-sm-column flex-md-column flex-lg-row">
-                                            <div class="no-thumbnail mb-2 mb-md-0">
-                                                <img class="avatar lg rounded-circle" src="assets/images/xs/avatar2.jpg" alt="">
-                                            </div>
-                                            <div class="flex-fill ms-3 text-truncate">
-                                                <h6 class="mb-0  fw-bold">Rachel Carr(you)</h6>
-                                                <span class="text-muted">rachel.carr@gmail.com</span>
-                                            </div>
-                                            <div class="members-action">
-                                                <span class="members-role ">Admin</span>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn bg-transparent dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="icofont-ui-settings  fs-6"></i>
-                                                    </button>
-                                                    <ul class="dropdown-menu dropdown-menu-end">
-                                                        <li><a class="dropdown-item" href="#"><i class="icofont-ui-password fs-6 me-2"></i>ResetPassword</a></li>
-                                                        <li><a class="dropdown-item" href="#"><i class="icofont-chart-line fs-6 me-2"></i>ActivityReport</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item py-3 text-center text-md-start">
-                                        <div class="d-flex align-items-center flex-column flex-sm-column flex-md-column flex-lg-row">
-                                            <div class="no-thumbnail mb-2 mb-md-0">
-                                                <img class="avatar lg rounded-circle" src="assets/images/xs/avatar3.jpg" alt="">
-                                            </div>
-                                            <div class="flex-fill ms-3 text-truncate">
-                                                <h6 class="mb-0  fw-bold">Lucas Baker<a href="#" class="link-secondary ms-2">(Resend invitation)</a></h6>
-                                                <span class="text-muted">lucas.baker@gmail.com</span>
-                                            </div>
-                                            <div class="members-action">
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn bg-transparent dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        Members
-                                                    </button>
-                                                    <ul class="dropdown-menu dropdown-menu-end">
-                                                        <li>
-                                                            <a class="dropdown-item" href="#">
-                                                                <i class="icofont-check-circled"></i>
-
-                                                                <span>All operations permission</span>
-                                                            </a>
-
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item" href="#">
-                                                                <i class="fs-6 p-2 me-1"></i>
-                                                                <span>Only Invite & manage team</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn bg-transparent dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="icofont-ui-settings  fs-6"></i>
-                                                    </button>
-                                                    <ul class="dropdown-menu dropdown-menu-end">
-                                                        <li><a class="dropdown-item" href="#"><i class="icofont-delete-alt fs-6 me-2"></i>Delete Member</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item py-3 text-center text-md-start">
-                                        <div class="d-flex align-items-center flex-column flex-sm-column flex-md-column flex-lg-row">
-                                            <div class="no-thumbnail mb-2 mb-md-0">
-                                                <img class="avatar lg rounded-circle" src="assets/images/xs/avatar8.jpg" alt="">
-                                            </div>
-                                            <div class="flex-fill ms-3 text-truncate">
-                                                <h6 class="mb-0  fw-bold">Una Coleman</h6>
-                                                <span class="text-muted">una.coleman@gmail.com</span>
-                                            </div>
-                                            <div class="members-action">
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn bg-transparent dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        Members
-                                                    </button>
-                                                    <ul class="dropdown-menu dropdown-menu-end">
-                                                        <li>
-                                                            <a class="dropdown-item" href="#">
-                                                                <i class="icofont-check-circled"></i>
-
-                                                                <span>All operations permission</span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item" href="#">
-                                                                <i class="fs-6 p-2 me-1"></i>
-                                                                <span>Only Invite & manage team</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="btn-group">
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn bg-transparent dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                                            <i class="icofont-ui-settings  fs-6"></i>
-                                                        </button>
-                                                        <ul class="dropdown-menu dropdown-menu-end">
-                                                            <li><a class="dropdown-item" href="#"><i class="icofont-ui-password fs-6 me-2"></i>ResetPassword</a></li>
-                                                            <li><a class="dropdown-item" href="#"><i class="icofont-chart-line fs-6 me-2"></i>ActivityReport</a></li>
-                                                            <li><a class="dropdown-item" href="#"><i class="icofont-delete-alt fs-6 me-2"></i>Suspend member</a></li>
-                                                            <li><a class="dropdown-item" href="#"><i class="icofont-not-allowed fs-6 me-2"></i>Delete Member</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Create Project-->
             <div class="modal fade" id="createproject" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
@@ -702,27 +598,6 @@ include "includes/config.php";
                                     <button type="submit" name="add_user" class="btn btn-primary">Submit</button>
                                 </div>
                             </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Edit Project-->
-            <!-- Modal  Delete Folder/ File-->
-            <div class="modal fade" id="deleteproject" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title  fw-bold" id="deleteprojectLabel"> Delete item Permanently?</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body justify-content-center flex-column d-flex">
-                            <i class="icofont-ui-delete text-danger display-2 text-center mt-2"></i>
-                            <p class="mt-4 fs-5 text-center">You can only delete this item Permanently</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-danger color-fff">Delete</button>
                         </div>
                     </div>
                 </div>

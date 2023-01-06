@@ -38,7 +38,6 @@ if (isset($_POST['login'])) {
 }
 
 // add new farm details
-
 if (isset($_POST['add_farm'])) {
     // Get form data and store in variables also sanitize data
     $farm_name = mysqli_real_escape_string($dbconnect, $_POST['farm_name']);
@@ -315,5 +314,21 @@ if (isset($_POST['update_farmer_check_list'])) {
             header('location: ../farmers.php?type=error&msg=Error updating farmer check list');
             exit();
         }
+    }
+}
+
+// delete from any table and redirect to page 
+if (isset($_POST['delete'])) {
+    $table = mysqli_real_escape_string($dbconnect, $_POST['table']);
+    $id = mysqli_real_escape_string($dbconnect, $_POST['id']);
+    $redirect = mysqli_real_escape_string($dbconnect, $_POST['redirect']);
+    $delete = "DELETE FROM $table WHERE id = '$id'";
+    $delete_query = mysqli_query($dbconnect, $delete);
+    if ($delete_query) {
+        header('location: ../' . $redirect . '.php?type=success&msg=Deleted successfully');
+        exit();
+    } else {
+        header('location: ../' . $redirect . '.php?type=error&msg=Error deleting');
+        exit();
     }
 }

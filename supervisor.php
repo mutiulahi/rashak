@@ -71,10 +71,37 @@ include "includes/config.php";
                                                         <td>
                                                             <div class="btn-group" role="group" aria-label="Basic outlined example">
                                                                 <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editproject<?php echo $id; ?>"><i class="icofont-edit text-success"></i></button>
-                                                                <button type="button" class="btn btn-outline-secondary deleterow"><i class="icofont-ui-delete text-danger"></i></button>
+                                                                <button type="button" class="btn btn-outline-secondary deleterow" data-bs-toggle="modal" data-bs-target="#deleteproject<?php echo $id; ?>"><i class="icofont-ui-delete text-danger"></i></button>
                                                             </div>
                                                         </td>
                                                     </tr>
+
+                                                    <!-- Delete supervisor  -->
+                                                    <div class="modal fade" id="deleteproject<?php echo $id; ?>" tabindex="-1" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title  fw-bold" id="deleteprojectLabel"> Delete <?php echo $name; ?> Permanently?</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <form action="includes/process.php" method="post">
+                                                                    <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                                                    <input type="hidden" name="redirect" value="supervisor">
+                                                                    <input type="hidden" name="table" value="users">
+                                                                    <div class="modal-body justify-content-center flex-column d-flex">
+                                                                        <i class="icofont-ui-delete text-danger display-2 text-center mt-2"></i>
+                                                                        <p class="mt-4 fs-5 text-center"> Are you sure of this Action </p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                        <button type="submit" name="delete" class="btn btn-danger text-white">Delete</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- // Edit Supervisor -->
                                                     <div class="modal fade" id="editproject<?php echo $id ?>" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
                                                             <div class="modal-content">

@@ -84,6 +84,7 @@ include "includes/config.php";
                                                     $average_monthly_income = $FarmersRow['average_monthly_income'];
                                                     $other_income = $FarmersRow['other_income'];
                                                     $land_size = $FarmersRow['land_size'];
+                                                    $land_coordinate =$FarmersRow['land_coordinate'];
                                                     $land_picture = $FarmersRow['land_picture'];
                                                     $upload_profile_picture = $FarmersRow['upload_profile_picture'];
                                                     $farm_location = $FarmersRow['farm_location'];
@@ -101,15 +102,15 @@ include "includes/config.php";
                                                         <td><?php echo $input_crop; ?></td>
                                                         <td>
                                                             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editproject<?php echo substr($id, -4); ?>"><i class="icofont-edit text-success"></i></button>
-                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#checklist<?php echo substr($id, -4); ?>">Monitor field</button>
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editproject<?php echo substr($id, -2); ?>"><i class="icofont-edit text-success"></i></button>
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#checklist<?php echo substr($id, -2); ?>">Monitor field</button>
                                                                 <a href="tickets.php?farm_id=<?php echo $id; ?>" class="btn btn-outline-secondary">Harvest</a>
-                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#details<?php echo substr($id, -4); ?>"><i class="fa fa-eye text-primary"></i></button>
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#details<?php echo substr($id, -2); ?>"><i class="fa fa-eye text-primary"></i></button>
                                                                 <button type="button" class="btn btn-outline-secondary deleterow"><i class="icofont-ui-delete text-danger"></i></button>
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <div class="modal fade" id="editproject<?php echo substr($id, -4); ?>" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal fade" id="editproject<?php echo substr($id, -2); ?>" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -141,7 +142,7 @@ include "includes/config.php";
                                                         </div>
                                                     </div>
 
-                                                    <div class="modal fade" id="editproject<?php echo substr($id, -4); ?>" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal fade" id="editproject<?php echo substr($id, -2); ?>" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -173,7 +174,7 @@ include "includes/config.php";
                                                         </div>
                                                     </div>
                                                     <!-- check list -->
-                                                    <div class="modal fade" id="checklist<?php echo substr($id, -4); ?>" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal fade" id="checklist<?php echo substr($id, -2); ?>" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -263,7 +264,7 @@ include "includes/config.php";
 
                                                     
                                                     <!-- details -->
-                                                    <div class="modal fade" id="details<?php echo substr($id, -4); ?>" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal fade" id="details<?php echo substr($id, -2); ?>" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">

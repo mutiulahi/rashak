@@ -68,7 +68,7 @@ include "includes/config.php";
                                                 </div>
                                                 <div class="form-group col-md-6 mb-4">
                                                     <label class="mb-2" for="exampleInputEmail1">Date Of Birth</label>
-                                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="date_of_birth" placeholder="Enter Date Of Birth">
+                                                    <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="date_of_birth" placeholder="Enter Date Of Birth">
                                                 </div>
                                                 <div class="form-group col-md-6 mb-4">
                                                     <label class="mb-2" for="exampleInputEmail1">Enter type of Crop</label>
@@ -150,6 +150,10 @@ include "includes/config.php";
                                                 <div class="form-group col-md-6 mb-4">
                                                     <label class="mb-2" for="exampleInputEmail1">Land size</label>
                                                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="land_size" placeholder="Enter Land size">
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label class="mb-2" for="exampleInputEmail1">Land coordinate</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="land_coordinate" placeholder="Enter Land coordinate">
                                                 </div>
                                                 <div class="form-group col-md-6 mb-4">
                                                     <label class="mb-2" for="exampleInputEmail1">Land picture</label>

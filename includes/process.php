@@ -180,6 +180,7 @@ if (isset($_POST['onboardfarmer'])) {
     $average_monthly_income = mysqli_real_escape_string($dbconnect, $_POST['average_monthly_income']);
     $other_income = mysqli_real_escape_string($dbconnect, $_POST['other_income']);
     $land_size = mysqli_real_escape_string($dbconnect, $_POST['land_size']);
+    $land_coordinate = mysqli_real_escape_string($dbconnect, $_POST['land_coordinate']);
     $farm_location = mysqli_real_escape_string($dbconnect, $_POST['farm_location']);
     $home_address = mysqli_real_escape_string($dbconnect, $_POST['home_address']);
     $state_of_origin = mysqli_real_escape_string($dbconnect, $_POST['state_of_origin']);
@@ -230,8 +231,8 @@ if (isset($_POST['onboardfarmer'])) {
     $start_check_list_query = mysqli_query($dbconnect, $start_check_list);
 
 
-    $onboardfarmer = "INSERT INTO farmers(unique_id, input_crop, email, first_name, last_name, phone_number, date_of_birth, gender, disability, marital_status, did_you_have_children, numbers_of_children, is_children_in_school, average_monthly_income, other_income, land_size, land_picture, upload_profile_picture, farm_location, home_address, state_of_origin, nationality, national_means_of_identity, commitment_fee, reciept_of_commitment) 
-    VALUES ('$unique_id', '$email', '$first_name', '$input_crop', '$last_name', '$phone_number', '$date_of_birth', '$gender', '$disability', '$marital_status', '$did_you_have_children', '$numbers_of_children', '$is_children_in_school', '$average_monthly_income', '$other_income', '$land_size', '$farmer_land_pic_destination', '$farmer_profile_pic_destination', '$farm_location', '$home_address', '$state_of_origin', '$nationality', '$farmer_national_means_of_identity_destination', '$commitment_fee', '$farmer_reciept_of_commitment_destination')";
+    $onboardfarmer = "INSERT INTO farmers(unique_id, input_crop, email, first_name, last_name, phone_number, date_of_birth, gender, disability, marital_status, did_you_have_children, numbers_of_children, is_children_in_school, average_monthly_income, other_income, land_size,land_coordinate, land_picture, upload_profile_picture, farm_location, home_address, state_of_origin, nationality, national_means_of_identity, commitment_fee, reciept_of_commitment) 
+    VALUES ('$unique_id', '$email', '$first_name', '$input_crop', '$last_name', '$phone_number', '$date_of_birth', '$gender', '$disability', '$marital_status', '$did_you_have_children', '$numbers_of_children', '$is_children_in_school', '$average_monthly_income', '$other_income', '$land_size','$land_coordinate', '$farmer_land_pic_destination', '$farmer_profile_pic_destination', '$farm_location', '$home_address', '$state_of_origin', '$nationality', '$farmer_national_means_of_identity_destination', '$commitment_fee', '$farmer_reciept_of_commitment_destination')";
     $result = mysqli_query($dbconnect, $onboardfarmer);
     if ($result) {
         header('location: ../farmers.php?type=success&msg=Farmer onboarded successfully');

@@ -11,35 +11,30 @@
                 <span class="logo-text">Menu</span>
             </a>
             <!-- Menu: main ul -->
-
+            <!-- get current file -->
+            <?php
+                $current_file = basename($_SERVER['PHP_SELF']);
+            ?>
             <ul class="menu-list flex-grow-1 mt-3">
                 <li class="collapsed">
-                    <a href="dashboard.php" class="m-link active">
+                    <a href="dashboard.php" class="m-link <?php if($current_file == 'dashboard.php') {echo 'active'; } ?>">
                         <i class="icofont-home fs-5"></i> <span>Dashboard</span></a>
                 </li>
-                <li  class="collapsed">
-                    <a class="m-link"  data-bs-toggle="collapse" data-bs-target="#project-Components" href="#">
-                        <i class="icofont-briefcase"></i><span>Farms</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
-                    <!-- Menu: Sub menu ul -->
-                    <ul class="sub-menu collapse" id="project-Components">
-                        <li><a class="ms-link" href="projects.php"><span>Farms</span></a></li>
-                        <?php if($_SESSION['id'] == 4) { ?>
-                        <li><a class="ms-link" href="assign_farms.php"><span>Assign Supervisors</span></a></li>
-                        <?php } ?>
-                    </ul>
-                </li>
-                
-                
                 <li class="collapsed">
-                    <a class="m-link" data-bs-toggle="collapse" data-bs-target="#client-Components" href="#"><i
-                            class="icofont-user-male"></i> <span>Users</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
-                    <ul class="sub-menu collapse" id="client-Components">
-                        <li><a class="ms-link" href="farmers.php"> <span> Farmers</span></a></li>
-                        <?php if($_SESSION['id'] == 4) { ?>
-                        <li><a class="ms-link" href="supervisor.php"> <span> Supervisor</span></a></li>
-                        <?php } ?>
-                        <!-- <li><a class="ms-link" href="members.php"> <span> Members</span></a></li> -->
-                    </ul>
+                    <a href="farmers.php" class="m-link  <?php if($current_file == 'farmers.php') {echo 'active'; } ?>">
+                        <i class="icofont-home fs-5"></i> <span>Farmers</span></a>
+                </li>
+                <li class="collapsed">
+                    <a href="onboardfarmers.php" class="m-link  <?php if($current_file == 'onboardfarmers.php') {echo 'active'; } ?>">
+                        <i class="icofont-home fs-5"></i> <span>Onboard New Farmer</span></a>
+                </li>
+                <li class="collapsed">
+                    <a href="supervisor.php" class="m-link  <?php if($current_file == 'supervisor.php') {echo 'active'; } ?>">
+                        <i class="icofont-home fs-5"></i> <span>Supervisor</span></a>
+                </li>
+                <li class="collapsed">
+                    <a href="assign_farms.php" class="m-link  <?php if($current_file == 'assign_farms.php') {echo 'active'; } ?>">
+                        <i class="icofont-home fs-5"></i> <span>Assign Supervisor</span></a>
                 </li>
             </ul>
 

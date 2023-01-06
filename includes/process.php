@@ -200,7 +200,13 @@ if (isset($_POST['onboardfarmer'])) {
     $farmer_profile_pic_ext = strtolower(end($farmer_profile_pic_ext));
     $farmer_profile_pic_name = uniqid('', true) . '.' . $farmer_profile_pic_ext;
     $farmer_profile_pic_destination = 'uploads/farmers/' . $farmer_profile_pic_name;
-    move_uploaded_file($farmer_profile_pic, '../'.$farmer_profile_pic_destination);
+    $allow_ext = array('jpg', 'jpeg', 'png');
+    if (in_array($farmer_profile_pic_ext, $allow_ext)) {
+        move_uploaded_file($farmer_profile_pic, '../'.$farmer_profile_pic_destination);
+    } else {
+        header('location: ../onboardfarmers.php?type=error&msg=Error uploading profile picture, only jpg, jpeg and png files are allowed');
+        exit();
+    }
 
     $farmer_land_pic = $land_picture['tmp_name']; // get the temporary location of the file
     // get the file extension
@@ -208,7 +214,13 @@ if (isset($_POST['onboardfarmer'])) {
     $farmer_land_pic_ext = strtolower(end($farmer_land_pic_ext));
     $farmer_land_pic_name = uniqid('', true) . '.' . $farmer_land_pic_ext;
     $farmer_land_pic_destination = 'uploads/farmers/' . $farmer_land_pic_name;
-    move_uploaded_file($farmer_land_pic, '../'.$farmer_land_pic_destination);
+    $allow_ext = array('jpg', 'jpeg', 'png');
+    if (in_array($farmer_land_pic_ext, $allow_ext)) {
+        move_uploaded_file($farmer_land_pic, '../'.$farmer_land_pic_destination);
+    } else {
+        header('location: ../onboardfarmers.php?type=error&msg=Error uploading land picture, only jpg, jpeg and png files are allowed');
+        exit();
+    }
 
     $farmer_national_means_of_identity = $national_means_of_identity['tmp_name']; // get the temporary location of the file
     // get the file extension
@@ -216,7 +228,13 @@ if (isset($_POST['onboardfarmer'])) {
     $farmer_national_means_of_identity_ext = strtolower(end($farmer_national_means_of_identity_ext));
     $farmer_national_means_of_identity_name = uniqid('', true) . '.' . $farmer_national_means_of_identity_ext;
     $farmer_national_means_of_identity_destination = 'uploads/farmers/' . $farmer_national_means_of_identity_name;
-    move_uploaded_file($farmer_national_means_of_identity, '../'.$farmer_national_means_of_identity_destination);
+    $allow_ext = array('jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx');
+    if (in_array($farmer_national_means_of_identity_ext, $allow_ext)) {
+        move_uploaded_file($farmer_national_means_of_identity, '../'.$farmer_national_means_of_identity_destination);
+    } else {
+        header('location: ../onboardfarmers.php?type=error&msg=Error uploading national means of identity, only pdf, doc, docx, jpg, jpeg, png are allowed');
+        exit();
+    }
 
     $farmer_reciept_of_commitment = $reciept_of_commitment['tmp_name']; // get the temporary location of the file
     // get the file extension
@@ -224,7 +242,13 @@ if (isset($_POST['onboardfarmer'])) {
     $farmer_reciept_of_commitment_ext = strtolower(end($farmer_reciept_of_commitment_ext));
     $farmer_reciept_of_commitment_name = uniqid('', true) . '.' . $farmer_reciept_of_commitment_ext;
     $farmer_reciept_of_commitment_destination = 'uploads/farmers/' . $farmer_reciept_of_commitment_name;
-    move_uploaded_file($farmer_reciept_of_commitment, '../'.$farmer_reciept_of_commitment_destination);
+    $allow_ext = array('jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx');
+    if (in_array($farmer_reciept_of_commitment_ext, $allow_ext)) {
+        move_uploaded_file($farmer_reciept_of_commitment, '../'.$farmer_reciept_of_commitment_destination);
+    } else {
+        header('location: ../onboardfarmers.php?type=error&msg=Error uploading reciept of commitment, only pdf, doc, docx, jpg, jpeg, png are allowed');
+        exit();
+    }
 
 
     $start_check_list = "INSERT INTO farmer_check_lists(farmer_id) VALUES ('$unique_id')";
@@ -232,7 +256,7 @@ if (isset($_POST['onboardfarmer'])) {
 
 
     $onboardfarmer = "INSERT INTO farmers(unique_id, input_crop, email, first_name, last_name, phone_number, date_of_birth, gender, disability, marital_status, did_you_have_children, numbers_of_children, is_children_in_school, average_monthly_income, other_income, land_size,land_coordinate, land_picture, upload_profile_picture, farm_location, home_address, state_of_origin, nationality, national_means_of_identity, commitment_fee, reciept_of_commitment) 
-    VALUES ('$unique_id', '$email', '$first_name', '$input_crop', '$last_name', '$phone_number', '$date_of_birth', '$gender', '$disability', '$marital_status', '$did_you_have_children', '$numbers_of_children', '$is_children_in_school', '$average_monthly_income', '$other_income', '$land_size','$land_coordinate', '$farmer_land_pic_destination', '$farmer_profile_pic_destination', '$farm_location', '$home_address', '$state_of_origin', '$nationality', '$farmer_national_means_of_identity_destination', '$commitment_fee', '$farmer_reciept_of_commitment_destination')";
+    VALUES ('$unique_id','$input_crop', '$email', '$first_name',  '$last_name', '$phone_number', '$date_of_birth', '$gender', '$disability', '$marital_status', '$did_you_have_children', '$numbers_of_children', '$is_children_in_school', '$average_monthly_income', '$other_income', '$land_size','$land_coordinate', '$farmer_land_pic_destination', '$farmer_profile_pic_destination', '$farm_location', '$home_address', '$state_of_origin', '$nationality', '$farmer_national_means_of_identity_destination', '$commitment_fee', '$farmer_reciept_of_commitment_destination')";
     $result = mysqli_query($dbconnect, $onboardfarmer);
     if ($result) {
         header('location: ../farmers.php?type=success&msg=Farmer onboarded successfully');

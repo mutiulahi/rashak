@@ -43,6 +43,21 @@ include "includes/config.php";
                         </div>
                     </div> <!-- Row end  -->
                     <div class="row clearfix g-3">
+                        <?php
+                        if (isset($_GET['type']) && $_GET['type'] == 'success') {
+                            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>Success!</strong> ' . $_GET['msg'] . '
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>';
+                        } ?>
+
+                        <?php
+                        if (isset($_GET['type']) && $_GET['type'] == 'error') {
+                            echo '<div class="alert alert-error alert-dismissible fade show" role="alert">
+                                        <strong>Error!</strong> ' . $_GET['msg'] . '
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>';
+                        } ?>
                         <div class="col-sm-12">
                             <div class="card mb-3">
                                 <div class="card-body">
@@ -141,18 +156,18 @@ include "includes/config.php";
                                                 </div>
                                                 <div class="form-group col-md-6 mb-4">
                                                     <label class="mb-2" for="exampleInputEmail1">Average monthly income (₦)</label>
-                                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="average_monthly_income" placeholder="Enter average montly income">
+                                                    <input type="number" min="1000.00" step="0.01" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="average_monthly_income" placeholder="Enter average montly income">
                                                 </div>
                                                 <div class="form-group col-md-6 mb-4">
                                                     <label class="mb-2" for="exampleInputEmail1">Any source of income apart from agriculture? If yes state it here</label>
                                                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="other_income" placeholder="Do you have any other source of income apart from agriculture?">
                                                 </div>
                                                 <div class="form-group col-md-6 mb-4">
-                                                    <label class="mb-2" for="exampleInputEmail1">Land size</label>
-                                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="land_size" placeholder="Enter Land size">
+                                                    <label class="mb-2" for="exampleInputEmail1">Land size (Archers)</label>
+                                                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="land_size" placeholder="Enter Land size">
                                                 </div>
                                                 <div class="form-group col-md-6 mb-4">
-                                                    <label class="mb-2" for="exampleInputEmail1">Land coordinate</label>
+                                                    <label class="mb-2" for="exampleInputEmail1">Land coordinate <code>e.g 20x10</code></label>
                                                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="land_coordinate" placeholder="Enter Land coordinate">
                                                 </div>
                                                 <div class="form-group col-md-6 mb-4">

@@ -68,11 +68,12 @@ $members = mysqli_num_rows($resultMembers);
 function getAssignedFarm($supervisor_id)
 {
     include 'includes/database.php';
-    $sql = "SELECT * FROM farm_users INNER JOIN farm_details ON  farm_details.id = farm_users.farm_id WHERE farm_users.user_id = '$supervisor_id'";
+    $sql = "SELECT * FROM farm_users INNER JOIN farmers ON  farmers.unique_id = farm_users.farm_id WHERE farm_users.user_id = '$supervisor_id'";
     $result = mysqli_query($dbconnect, $sql);
     $farm = mysqli_num_rows($result);
+    $farm_detail = mysqli_fetch_array($result);
     if ($farm > 0) {
-        return mysqli_fetch_array($result)['name'];
+        return $farm_detail['first_name'] . " " . $farm_detail['last_name'];
     } else {
         return "not assigned";
     }
@@ -80,12 +81,12 @@ function getAssignedFarm($supervisor_id)
 
 
 
-$sql_farmdetails = "SELECT * FROM farm_details";
+$sql_farmdetails = "SELECT * FROM farmers";
 $resultFarmDetails = mysqli_query($dbconnect, $sql_farmdetails);
 $farm_details = mysqli_num_rows($resultFarmDetail);
 $farm_array = array();
 while ($farmaa = mysqli_fetch_array($resultFarmDetails)) {
-    $farm_id = $farmaa['id'];
-    $farm_name = $farmaa['name'];
+    $farm_id = $farmaa['unique_id'];
+    $farm_name = $farmaa['first_name'] . " " . $farmaa['last_name'];
     $farm_array[$farm_id] = $farm_name;
 }

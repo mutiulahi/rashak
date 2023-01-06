@@ -33,7 +33,7 @@ include "includes/config.php";
                     <div class="row align-items-center">
                         <div class="border-0 mb-4">
                             <div class="card-header p-0 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
-                                <h3 class="fw-bold py-3 mb-0">Supervisors</h3>
+                                <h3 class="fw-bold py-3 mb-0">Assign Supervisors</h3>
                                 <div class="d-flex py-2 project-tab flex-wrap w-sm-100">
                                     <button type="button" class="btn btn-dark w-sm-100" data-bs-toggle="modal" data-bs-target="#createproject"><i class="icofont-plus-circle me-2 fs-6"></i>Add Supervisor</button>
                                 </div>
@@ -48,9 +48,9 @@ include "includes/config.php";
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>Name</th>
+                                                <th>Supervisor's Name</th>
                                                 <th>Email</th>
-                                                <th>Farm</th>
+                                                <th>Farmer id</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -89,9 +89,9 @@ include "includes/config.php";
                                                                             <div class="row g-3 mb-3">
                                                                                 <div class="col-sm-12">
                                                                                     <div class="col-sm-12">
-                                                                                        <label for="formFileMultipleone" class="form-label">Farms</label>
+                                                                                        <label for="formFileMultipleone" class="form-label">Farmers</label>
                                                                                         <select class="form-select" name="farm_id" aria-label="Default select example">
-                                                                                            <option selected>Select Farm</option>
+                                                                                            <option selected>Select Farmer</option>
                                                                                             <?php
                                                                                             if (!empty($farm_array)) {
                                                                                                 foreach ($farm_array as $key => $farm) {

@@ -35,10 +35,7 @@ include "includes/config.php";
                             <div class="card-header p-0 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                                 <h3 class="fw-bold py-3 mb-0">Farmers</h3>
                                 <div class="d-flex py-2 project-tab flex-wrap w-sm-100">
-                                    <?php if ($_SESSION['id'] == 4) { ?>
-                                        <!-- <button type="button" class="btn btn-dark w-sm-100"  data-bs-target="#createproject"><i class="icofont-plus-circle me-2 fs-6"></i>Add Farmer</button>                                 -->
-                                        <a href="onboardfarmers.php" type="a" class="btn btn-dark w-sm-100" data-bs-target="#createproject"><i class="icofont-plus-circle me-2 fs-6"></i>Add Farmer</a>
-                                    <?php } ?>
+                                    <a href="onboardfarmers.php" type="a" class="btn btn-dark w-sm-100" data-bs-target="#createproject"><i class="icofont-plus-circle me-2 fs-6"></i>Add Farmer</a>
                                 </div>
                             </div>
                         </div>

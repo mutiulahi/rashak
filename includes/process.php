@@ -3,39 +3,39 @@ session_start();
 include "database.php";
 
 // Login user using prepared statement if login button is clicked
-if (isset($_POST['login'])) {
-    // Get form data and store in variables also sanitize data
-    $email = mysqli_real_escape_string($dbconnect, $_POST['email']);
-    $password = mysqli_real_escape_string($dbconnect, $_POST['password']);
+// if (isset($_POST['login'])) {
+//     // Get form data and store in variables also sanitize data
+//     $email = mysqli_real_escape_string($dbconnect, $_POST['email']);
+//     $password = mysqli_real_escape_string($dbconnect, $_POST['password']);
 
-    // Check if email or JRN already exists 
-    $sql = "SELECT * FROM users WHERE email = '$email' LIMIT 1";
-    $result = mysqli_query($dbconnect, $sql);
-    $user = mysqli_num_rows($result);
-    if ($user == 1) {
-        // Check if password match
-        $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password' AND password = '$password' LIMIT 1";
-        $result = mysqli_query($dbconnect, $sql);
-        $user = mysqli_num_rows($result);
-        if ($user == 1) {
-            // Login user
-            $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password' AND password = '$password' LIMIT 1";
-            $result = mysqli_query($dbconnect, $sql);
-            $user = mysqli_fetch_assoc($result);
-            $_SESSION['auth'] = uniqid();
-            $_SESSION['id'] = $user['role_id'];
-            $_SESSION['auth_id'] = $user['id'];
-            header('location: ../dashboard.php?type=success&msg=Login Successful');
-            exit();
-        } else {
-            header('location: ../index.php?type=error&msg=Incorrect Password');
-            exit();
-        }
-    } else {
-        header('location: ../index.php?type=error&msg=Email does not exist');
-        exit();
-    }
-}
+//     // Check if email or JRN already exists 
+//     $sql = "SELECT * FROM users WHERE email = '$email' LIMIT 1";
+//     $result = mysqli_query($dbconnect, $sql);
+//     $user = mysqli_num_rows($result);
+//     if ($user == 1) {
+//         // Check if password match
+//         $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password' AND password = '$password' LIMIT 1";
+//         $result = mysqli_query($dbconnect, $sql);
+//         $user = mysqli_num_rows($result);
+//         if ($user == 1) {
+//             // Login user
+//             $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password' AND password = '$password' LIMIT 1";
+//             $result = mysqli_query($dbconnect, $sql);
+//             $user = mysqli_fetch_assoc($result);
+//             $_SESSION['auth'] = uniqid();
+//             $_SESSION['id'] = $user['role_id'];
+//             $_SESSION['auth_id'] = $user['id'];
+//             header('location: ../dashboard.php?type=success&msg=Login Successful');
+//             exit();
+//         } else {
+//             header('location: ../index.php?type=error&msg=Incorrect Password');
+//             exit();
+//         }
+//     } else {
+//         header('location: ../index.php?type=error&msg=Email does not exist');
+//         exit();
+//     }
+// }
 
 // add new farm details
 if (isset($_POST['add_farm'])) {

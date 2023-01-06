@@ -22,6 +22,7 @@ $result = mysqli_query($dbconnect, $sql);
 while ($user = mysqli_fetch_array($result)) {
     $name = $user['name'];
     $email = $user['email'];
+    $role = $user['role_id'];
 }
 
 // get farm details from the database inner join farm_comment table

@@ -36,8 +36,11 @@ include "includes/config.php";
                 <div class="container-xxl">
                     <div class="row align-items-center">
                         <div class="border-0 mb-4">
+                        <a href="farmers.php" class="btn btn-outline-secondary btn-sm"><i class="icofont-rounded-left me-2"></i>Back</a>
                             <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                                 <h3 class="fw-bold mb-0">Harvest History</h3>
+                                <!-- arrow back -->
+                               
                                 <div class="col-auto d-flex w-sm-100">
                                     <button type="button" class="btn btn-dark btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#tickadd"><i class="icofont-plus-circle me-2 fs-6"></i>Add Histroy</button>
                                 </div>
@@ -69,7 +72,7 @@ include "includes/config.php";
                                                     $total_yield = $farmActivity['total_yield'];
                                                     $warehouse_to_be_delivered_to = $farmActivity['warehouse_to_be_delivered_to'];
                                                     $created_at = $farmActivity['created_at'];
-                                                    
+
                                             ?>
                                                     <tr>
                                                         <td><?php echo $farm_id; ?></td>
@@ -81,56 +84,56 @@ include "includes/config.php";
 
                                                         <td>
                                                             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#edittickit<?php echo substr($farm_id,-4); ?>"><i class="icofont-edit text-success"></i></button>
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#edittickit<?php echo substr($farm_id, -4); ?>"><i class="icofont-edit text-success"></i></button>
                                                                 <button type="button" class="btn btn-outline-secondary deleterow"><i class="icofont-ui-delete text-danger"></i></button>
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                     <!-- Edit Tickit-->
-            <div class="modal fade" id="edittickit<?php echo substr($farm_id,-4); ?>" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title  fw-bold" id="leaveaddLabel">Edit Farm Hervest</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <?php if(isset($_GET['farm_id'])){
+                                                    <!-- Edit Tickit-->
+                                                    <div class="modal fade" id="edittickit<?php echo substr($farm_id, -4); ?>" tabindex="-1" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title  fw-bold" id="leaveaddLabel">Edit Farm Hervest</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <?php if (isset($_GET['farm_id'])) {
 
-                       ?>
-                        <form action="includes/process.php" method="post">
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <input type="hidden" class="form-control" value="<?php echo $_GET['farm_id']; ?>" name="farm_id" id="sub">
-                                </div>
-                                            <div class="col-md-12 mb-3">
-                                                <label for="deptwo" class="form-label">Crop</label>
-                                                <input type="text" class="form-control" value="<?php echo $crop; ?>" name="crop" id="deptwo">
-                                            </div>
-                                            <div class="col-md-12 mb-3">
-                                                <label for="deptwo" class="form-label">Harvest Date</label>
-                                                <input type="date" class="form-control" value="<?php echo $harvest_date; ?>" name="harvest_date" id="deptwo">
-                                            </div>
-                                            <div class="col-md-12 mb-3">
-                                                <label for="deptwo" class="form-label">Total Yield</label>
-                                                <input type="number" class="form-control" value="<?php echo $total_yield; ?>" name="total_yield" id="deptwo">
-                                            </div>
-                                            <div class="col-md-12 mb-3">
-                                                <label for="deptwo" class="form-label">Warehouse to be delivered to</label>
-                                                <input type="text" class="form-control" value="<?php echo $warehouse_to_be_delivered_to; ?>" name="warehouse_to_be_delivered_to" id="deptwo">
-                                            </div>
-                                      
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" name="harvest" class="btn btn-primary">Add</button>
-                            </div>
-                        </form>
-                        <?php }else{
-                            // alert("No farm selected") and redirect to farm page
-                            echo "<script>alert('Please select a farm');window.location.href='projects.php' </script>";
-                        } ?>
-                    </div>
-                </div>
-            </div>
+                                                                ?>
+                                                                    <form action="includes/process.php" method="post">
+                                                                        <div class="modal-body">
+                                                                            <div class="mb-3">
+                                                                                <input type="hidden" class="form-control" value="<?php echo $_GET['farm_id']; ?>" name="farm_id" id="sub">
+                                                                            </div>
+                                                                            <div class="col-md-12 mb-3">
+                                                                                <label for="deptwo" class="form-label">Crop</label>
+                                                                                <input type="text" class="form-control" value="<?php echo $crop; ?>" name="crop" id="deptwo">
+                                                                            </div>
+                                                                            <div class="col-md-12 mb-3">
+                                                                                <label for="deptwo" class="form-label">Harvest Date</label>
+                                                                                <input type="date" class="form-control" value="<?php echo $harvest_date; ?>" name="harvest_date" id="deptwo">
+                                                                            </div>
+                                                                            <div class="col-md-12 mb-3">
+                                                                                <label for="deptwo" class="form-label">Total Yield</label>
+                                                                                <input type="number" class="form-control" value="<?php echo $total_yield; ?>" name="total_yield" id="deptwo">
+                                                                            </div>
+                                                                            <div class="col-md-12 mb-3">
+                                                                                <label for="deptwo" class="form-label">Warehouse to be delivered to</label>
+                                                                                <input type="text" class="form-control" value="<?php echo $warehouse_to_be_delivered_to; ?>" name="warehouse_to_be_delivered_to" id="deptwo">
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="submit" name="harvest" class="btn btn-primary">Add</button>
+                                                                        </div>
+                                                                    </form>
+                                                                <?php } else {
+                                                                    // alert("No farm selected") and redirect to farm page
+                                                                    echo "<script>alert('Please select a farm');window.location.href='projects.php' </script>";
+                                                                } ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                             <?php
                                                 }
                                             } ?>
@@ -151,37 +154,37 @@ include "includes/config.php";
                             <h5 class="modal-title  fw-bold" id="leaveaddLabel">Farm Hervest</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <?php if(isset($_GET['farm_id'])){
+                        <?php if (isset($_GET['farm_id'])) {
 
-                       ?>
-                        <form action="includes/process.php" method="post">
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <input type="hidden" class="form-control" value="<?php echo $_GET['farm_id']; ?>" name="farm_id" id="sub">
+                        ?>
+                            <form action="includes/process.php" method="post">
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <input type="hidden" class="form-control" value="<?php echo $_GET['farm_id']; ?>" name="farm_id" id="sub">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="deptwo" class="form-label">Crop</label>
+                                        <input type="text" class="form-control" name="crop" id="deptwo">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="deptwo" class="form-label">Harvest Date</label>
+                                        <input type="date" class="form-control" name="harvest_date" id="deptwo">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="deptwo" class="form-label">Total Yield</label>
+                                        <input type="number" class="form-control" name="total_yield" id="deptwo">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="deptwo" class="form-label">Warehouse to be delivered to</label>
+                                        <input type="text" class="form-control" name="warehouse_to_be_delivered_to" id="deptwo">
+                                    </div>
+
                                 </div>
-                                            <div class="col-md-12 mb-3">
-                                                <label for="deptwo" class="form-label">Crop</label>
-                                                <input type="text" class="form-control" name="crop" id="deptwo">
-                                            </div>
-                                            <div class="col-md-12 mb-3">
-                                                <label for="deptwo" class="form-label">Harvest Date</label>
-                                                <input type="date" class="form-control" name="harvest_date" id="deptwo">
-                                            </div>
-                                            <div class="col-md-12 mb-3">
-                                                <label for="deptwo" class="form-label">Total Yield</label>
-                                                <input type="number" class="form-control" name="total_yield" id="deptwo">
-                                            </div>
-                                            <div class="col-md-12 mb-3">
-                                                <label for="deptwo" class="form-label">Warehouse to be delivered to</label>
-                                                <input type="text" class="form-control" name="warehouse_to_be_delivered_to" id="deptwo">
-                                            </div>
-                                      
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" name="harvest" class="btn btn-primary">Add</button>
-                            </div>
-                        </form>
-                        <?php }else{
+                                <div class="modal-footer">
+                                    <button type="submit" name="harvest" class="btn btn-primary">Add</button>
+                                </div>
+                            </form>
+                        <?php } else {
                             // alert("No farm selected") and redirect to farm page
                             echo "<script>alert('Please select a farm');window.location.href='projects.php' </script>";
                         } ?>
@@ -189,7 +192,7 @@ include "includes/config.php";
                 </div>
             </div>
 
-           
+
         </div>
     </div>
 

@@ -261,7 +261,7 @@ include "includes/config.php";
                                                         </div>
                                                     </div>
 
-                                                    
+
                                                     <!-- details -->
                                                     <div class="modal fade" id="details<?php echo substr($id, -4); ?>" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -280,7 +280,7 @@ include "includes/config.php";
                                                                                         <div class="card-body">
                                                                                             <div class="d-flex align-items-center">
                                                                                                 <div class="flex-shrink-0 me-3">
-                                                                                                    <img src="<?php echo $upload_profile_picture; ?>" alt="" class="rounded-circle" width="50">
+                                                                                                    <img src="<?php echo $upload_profile_picture; ?>" alt="Farmer pictures" class="rounded-circle" width="50">
                                                                                                 </div>
                                                                                                 <!-- <div class="flex-grow-1">
                                                                                                     <h5 class="mb-1"><?php echo $name; ?></h5>
@@ -288,7 +288,7 @@ include "includes/config.php";
                                                                                                 </div> -->
                                                                                             </div>
                                                                                             <div class="row">
-                                                                                                <div class="col-md-6">
+                                                                                                <div class="col-md-12">
                                                                                                     <div class="mb-3">
                                                                                                         <label for="formFileMultipleone" class="form-label">Name</label>
                                                                                                         <span class="text-muted fw-bold"><?php echo $name; ?></span>
@@ -342,14 +342,6 @@ include "includes/config.php";
                                                                                                         <span class="text-muted fw-bold"><?php echo $land_coordinate; ?></span>
                                                                                                     </div>
                                                                                                     <div class="mb-3">
-                                                                                                        <label for="formFileMultipleone" class="form-label">Land picture</label>
-                                                                                                        <span class="text-muted fw-bold"><?php echo $land_picture; ?></span>
-                                                                                                    </div>
-                                                                                                    <div class="mb-3">
-                                                                                                        <label for="formFileMultipleone" class="form-label">Upload Profile photo</label>
-                                                                                                        <span class="text-muted fw-bold"><?php echo $upload_profile_picture; ?></span>
-                                                                                                    </div>
-                                                                                                    <div class="mb-3">
                                                                                                         <label for="formFileMultipleone" class="form-label">Home address</label>
                                                                                                         <span class="text-muted fw-bold"><?php echo $home_address; ?></span>
                                                                                                     </div>
@@ -365,17 +357,39 @@ include "includes/config.php";
                                                                                                         <label for="formFileMultipleone" class="form-label">Nationality</label>
                                                                                                         <span class="text-muted fw-bold"><?php echo $nationality; ?></span>
                                                                                                     </div>
-                                                                                                    <div class="mb-3">
-                                                                                                        <label for="formFileMultipleone" class="form-label">Upload national means of identification</label>
-                                                                                                        <span class="text-muted fw-bold"><?php echo $national_means_of_identity; ?></span>
-                                                                                                    </div>
-                                                                                                    <div class="mb-3">
-                                                                                                        <label for="formFileMultipleone" class="form-label">Commitment fee</label>
-                                                                                                        <span class="text-muted fw-bold"><?php echo $commitment_fee; ?></span>
-                                                                                                    </div>
-                                                                                                    <div class="mb-3">
-                                                                                                        <label for="formFileMultipleone" class="form-label">Receipt of commitment fee</label>
-                                                                                                        <span class="text-muted fw-bold"><?php echo $reciept_of_commitment; ?></span>
+
+                                                                                                    <!-- view image and documents -->
+                                                                                                    <div class="row">
+                                                                                                        <div class="card col-md-6">
+                                                                                                            <iframe src="<?php echo $upload_profile_picture; ?>" width="100%" height="200px"></iframe>
+                                                                                                            <div class="card-body">
+                                                                                                                <span class="card-title">Upload national means of identification</span>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="card col-md-6">
+                                                                                                            <iframe src="<?php echo $national_means_of_identity; ?>" width="100%" height="200px"></iframe>
+                                                                                                            <div class="card-body">
+                                                                                                                <span class="card-title fw-bold">Upload national means of identification</span>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="card col-md-6">
+                                                                                                            <iframe src="<?php echo $land_picture; ?>" width="100%" height="200px"></iframe>
+                                                                                                            <div class="card-body">
+                                                                                                                <span class="card-title fw-bold">Land picture</span>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="card col-md-6">
+                                                                                                            <iframe src="<?php echo $commitment_fee; ?>" width="100%" height="200px"></iframe>
+                                                                                                            <div class="card-body">
+                                                                                                                <span class="card-title fw-bold">Commitment fee</span>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="card col-md-6">
+                                                                                                            <iframe src="<?php ?>" width="100%" height="200px"></iframe>
+                                                                                                            <div class="card-body">
+                                                                                                                <span class="card-title fw-bold">Receipt of commitment fee</span>
+                                                                                                            </div>
+                                                                                                        </div>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>

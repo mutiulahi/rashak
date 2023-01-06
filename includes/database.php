@@ -14,12 +14,12 @@
 // // }
 
 
-$host = 'http://157.245.132.117/'; //188.166.....
+$host = 'localhost'; //188.166.....
 $user = 'tescode';
 $pass = 'tescode';
 $db = 'rashak_db';
 
-// $conn=mysqli_connect($host,$user,$pass,$db);
+$conn=mysqli_connect($host,$user,$pass,$db);
 $conn=true;
 
 if($conn)

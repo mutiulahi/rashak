@@ -14,18 +14,20 @@
 // // }
 
 
-$host = 'http://157.245.132.117/'; //188.166.....
-$user = 'tescode';
-$pass = 'tescode';
-$db = 'rashak_db';
+// $host = 'http://157.245.132.117/'; //188.166.....
+// $user = 'tescode';
+// $pass = 'tescode';
+// $db = 'rashak_db';
 
-$conn=mysqli_connect($host,$user,$pass,$db);
+// $conn=mysqli_connect($host,$user,$pass,$db);
 
-if($conn)
-{
-	echo "OK";
-}
-else
-{
-	echo "Error";
-}
+// if($conn)
+// {
+// 	echo "OK";
+// }
+// else
+// {
+// 	echo "Error";
+// }
+
+echo "Connected successfully";

@@ -69,18 +69,18 @@ if (isset($_POST['harvest'])) {
     $harvest_date = mysqli_real_escape_string($dbconnect, $_POST['harvest_date']);
     $total_yield = mysqli_real_escape_string($dbconnect, $_POST['total_yield']);
     $warehouse_to_be_delivered_to = mysqli_real_escape_string($dbconnect, $_POST['warehouse_to_be_delivered_to']);
-    $status = 1;
+    // $status = 1;
 
     // insert to db in farm_details
-    $farm_activity = "INSERT INTO farm_activities (farm_id, crop, harvest_date, total_yield, warehouse_to_be_delivered_to) VALUES ('$farm_id', '$crop', '$harvest_date', '$total_yield', '$warehouse_to_be_delivered_to')";
-    $result = mysqli_query($dbconnect, $farm_activity);
-    if ($result) {
-        header('location: ../tickets.php?farm_id=' . $farm_id . '&type=success&msg=Farm activity added successfully');
-        exit();
-    } else {
-        header('location: ../tickets.php?farm_id=' . $farm_id . '&type=error&msg=Error adding farm activity');
-        exit();
-    }
+    // $farm_activity = "INSERT INTO farm_activities (farm_id, crop, harvest_date, total_yield, warehouse_to_be_delivered_to) VALUES ('$farm_id', '$crop', '$harvest_date', '$total_yield', '$warehouse_to_be_delivered_to')";
+    // $result = mysqli_query($dbconnect, $farm_activity);
+    // if ($result) {
+    //     header('location: ../tickets.php?farm_id=' . $farm_id . '&type=success&msg=Farm activity added successfully');
+    //     exit();
+    // } else {
+    //     header('location: ../tickets.php?farm_id=' . $farm_id . '&type=error&msg=Error adding farm activity');
+    //     exit();
+    // }
 }
 
 // add new farm activity

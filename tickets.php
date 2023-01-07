@@ -148,7 +148,7 @@ include "includes/config.php";
 
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="submit" name="harvest_edit" class="btn btn-primary">Add</button>
+                                                                            <button type="submit" name="harvest_edit" class="btn btn-primary">Submit</button>
                                                                         </div>
                                                                     </form>
                                                                 <?php } else {

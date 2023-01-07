@@ -49,8 +49,8 @@ if (isset($_POST['add_farm'])) {
     // move file to the server
     move_uploaded_file($_FILES['farm_pic']['tmp_name'], "uploads/" . $_FILES['farm_pic']['name']);
 
-    '../'.// insert to db in farm_details
-    $sql = "INSERT INTO farm_details (name, location, size, picture, farm_description) VALUES ('$farm_name', '$farm_location', '$farm_size', '$farm_pic', '$farm_description')";
+    '../' . // insert to db in farm_details
+        $sql = "INSERT INTO farm_details (name, location, size, picture, farm_description) VALUES ('$farm_name', '$farm_location', '$farm_size', '$farm_pic', '$farm_description')";
     $result = mysqli_query($dbconnect, $sql);
     if ($result) {
         header('location: ../projects.php?type=success&msg=Farm details added successfully');
@@ -73,6 +73,29 @@ if (isset($_POST['harvest'])) {
 
     // insert to db in farm_details
     $farm_activity = "INSERT INTO farm_activities (`farm_id`, `crop`, `harvest_date`, `total_yield`, `warehouse_to_be_delivered_to`) VALUES ('$farm_id', '$crop', '$harvest_date', '$total_yield', '$warehouse_to_be_delivered_to')";
+    $result = mysqli_query($dbconnect, $farm_activity);
+    if ($result) {
+        header('location: ../tickets.php?farm_id=' . $farm_id . '&type=success&msg=Farm activity added successfully');
+        exit();
+    } else {
+        header('location: ../tickets.php?farm_id=' . $farm_id . '&type=error&msg=Error adding farm activity');
+        exit();
+    }
+}
+
+// add new farm activity
+if (isset($_POST['harvest_edit'])) {
+    // Get form data and store in variables also sanitize data
+    $farm_id = mysqli_real_escape_string($dbconnect, $_POST['farm_id']);
+    $crop = mysqli_real_escape_string($dbconnect, $_POST['crop']);
+    $harvest_date = mysqli_real_escape_string($dbconnect, $_POST['harvest_date']);
+    $total_yield = mysqli_real_escape_string($dbconnect, $_POST['total_yield']);
+    $warehouse_to_be_delivered_to = mysqli_real_escape_string($dbconnect, $_POST['warehouse_to_be_delivered_to']);
+    $status = 1;
+
+    // edit to db in farm_details
+    $farm_activity = "UPDATE farm_activities SET `crop` = '$crop', `harvest_date` = '$harvest_date', `total_yield` = '$total_yield', `warehouse_to_be_delivered_to` = '$warehouse_to_be_delivered_to' WHERE `farm_id` = '$farm_id'";
+
     $result = mysqli_query($dbconnect, $farm_activity);
     if ($result) {
         header('location: ../tickets.php?farm_id=' . $farm_id . '&type=success&msg=Farm activity added successfully');
@@ -201,7 +224,7 @@ if (isset($_POST['onboardfarmer'])) {
     $farmer_profile_pic_destination = 'uploads/farmers/' . $farmer_profile_pic_name;
     $allow_ext = array('jpg', 'jpeg', 'png');
     if (in_array($farmer_profile_pic_ext, $allow_ext)) {
-        move_uploaded_file($farmer_profile_pic, '../'.$farmer_profile_pic_destination);
+        move_uploaded_file($farmer_profile_pic, '../' . $farmer_profile_pic_destination);
     } else {
         header('location: ../onboardfarmers.php?type=error&msg=Error uploading profile picture, only jpg, jpeg and png files are allowed');
         exit();
@@ -215,7 +238,7 @@ if (isset($_POST['onboardfarmer'])) {
     $farmer_land_pic_destination = 'uploads/farmers/' . $farmer_land_pic_name;
     $allow_ext = array('jpg', 'jpeg', 'png');
     if (in_array($farmer_land_pic_ext, $allow_ext)) {
-        move_uploaded_file($farmer_land_pic, '../'.$farmer_land_pic_destination);
+        move_uploaded_file($farmer_land_pic, '../' . $farmer_land_pic_destination);
     } else {
         header('location: ../onboardfarmers.php?type=error&msg=Error uploading land picture, only jpg, jpeg and png files are allowed');
         exit();
@@ -229,7 +252,7 @@ if (isset($_POST['onboardfarmer'])) {
     $farmer_national_means_of_identity_destination = 'uploads/farmers/' . $farmer_national_means_of_identity_name;
     $allow_ext = array('jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx');
     if (in_array($farmer_national_means_of_identity_ext, $allow_ext)) {
-        move_uploaded_file($farmer_national_means_of_identity, '../'.$farmer_national_means_of_identity_destination);
+        move_uploaded_file($farmer_national_means_of_identity, '../' . $farmer_national_means_of_identity_destination);
     } else {
         header('location: ../onboardfarmers.php?type=error&msg=Error uploading national means of identity, only pdf, doc, docx, jpg, jpeg, png are allowed');
         exit();
@@ -243,7 +266,7 @@ if (isset($_POST['onboardfarmer'])) {
     $farmer_reciept_of_commitment_destination = 'uploads/farmers/' . $farmer_reciept_of_commitment_name;
     $allow_ext = array('jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx');
     if (in_array($farmer_reciept_of_commitment_ext, $allow_ext)) {
-        move_uploaded_file($farmer_reciept_of_commitment, '../'.$farmer_reciept_of_commitment_destination);
+        move_uploaded_file($farmer_reciept_of_commitment, '../' . $farmer_reciept_of_commitment_destination);
     } else {
         header('location: ../onboardfarmers.php?type=error&msg=Error uploading reciept of commitment, only pdf, doc, docx, jpg, jpeg, png are allowed');
         exit();
@@ -319,16 +342,26 @@ if (isset($_POST['update_farmer_check_list'])) {
 
 // delete from any table and redirect to page 
 if (isset($_POST['delete'])) {
+
     $table = mysqli_real_escape_string($dbconnect, $_POST['table']);
     $id = mysqli_real_escape_string($dbconnect, $_POST['id']);
     $redirect = mysqli_real_escape_string($dbconnect, $_POST['redirect']);
     $delete = "DELETE FROM $table WHERE id = '$id'";
     $delete_query = mysqli_query($dbconnect, $delete);
+
+    if (isset($_POST['farm_id'])) {
+        $location_success = '../' . $redirect . '.php?farm_id=' . $_POST['farm_id'] . '&type=success&msg=Deleted successfully';
+        $location_error = '../' . $redirect . '.php?farm_id=' . $_POST['farm_id'] . '&type=error&msg=Error deleting';
+    } else {
+
+        $location_success = '../' . $redirect . 'php?type=success&msg=Deleted successfully';
+        $location_error = '../' . $redirect . 'php?type=error&msg=Error deleting';
+    }
     if ($delete_query) {
-        header('location: ../' . $redirect . '.php?type=success&msg=Deleted successfully');
+        header('location: ' . $location_success);
         exit();
     } else {
-        header('location: ../' . $redirect . '.php?type=error&msg=Error deleting');
+        header('location: ' . $location_error);
         exit();
     }
 }

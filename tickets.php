@@ -66,6 +66,7 @@ include "includes/config.php";
                                             <?php
                                             if (isset($farm_Activity_num) and $farm_Activity_num > 0 and isset($_GET['farm_id'])) {
                                                 while ($farmActivity = mysqli_fetch_array($resultActivity)) {
+                                                    $id_id = $farmActivity['id'];
                                                     $farm_id = $farmActivity['farm_id'];
                                                     $crop = $farmActivity['crop'];
                                                     $harvest_date = $farmActivity['harvest_date'];
@@ -80,17 +81,40 @@ include "includes/config.php";
                                                         <td><?php echo $harvest_date; ?></td>
                                                         <td><?php echo $total_yield; ?></td>
                                                         <td><?php echo $warehouse_to_be_delivered_to; ?></td>
-                                                        <td><?php echo $created_at; ?></td>
 
                                                         <td>
                                                             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#edittickit<?php echo substr($farm_id, -4); ?>"><i class="icofont-edit text-success"></i></button>
-                                                                <button type="button" class="btn btn-outline-secondary deleterow"><i class="icofont-ui-delete text-danger"></i></button>
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#edittickit<?php echo substr($farm_id, -2); ?>"><i class="icofont-edit text-success"></i></button>
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#deleteproject<?php echo substr($farm_id, -2); ?>"><i class="icofont-ui-delete text-danger"></i></button>
                                                             </div>
                                                         </td>
                                                     </tr>
                                                     <!-- Edit Tickit-->
-                                                    <div class="modal fade" id="edittickit<?php echo substr($farm_id, -4); ?>" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal fade" id="deleteproject<?php echo substr($farm_id, -2); ?>" tabindex="-1" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title  fw-bold" id="deleteprojectLabel"> Delete <?php echo $name; ?> Permanently?</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <form action="includes/process.php" method="post">
+                                                                    <input type="hidden" name="id" value="<?php echo $id_id; ?>">
+                                                                    <input type="hidden" name="farm_id" value="<?php echo $farm_id; ?>">
+                                                                    <input type="hidden" name="redirect" value="tickets">
+                                                                    <input type="hidden" name="table" value="farm_activities">
+                                                                    <div class="modal-body justify-content-center flex-column d-flex">
+                                                                        <i class="icofont-ui-delete text-danger display-2 text-center mt-2"></i>
+                                                                        <p class="mt-4 fs-5 text-center"> Are you sure of this Action </p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                        <button type="submit" name="delete" class="btn btn-danger text-white">Delete</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade" id="edittickit<?php echo substr($farm_id, -2); ?>" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -124,7 +148,7 @@ include "includes/config.php";
 
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="submit" name="harvest" class="btn btn-primary">Add</button>
+                                                                            <button type="submit" name="harvest_edit" class="btn btn-primary">Add</button>
                                                                         </div>
                                                                     </form>
                                                                 <?php } else {

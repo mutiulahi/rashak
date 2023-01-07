@@ -72,8 +72,8 @@ if (isset($_POST['harvest'])) {
     // $status = 1;
 
     // insert to db in farm_details
-    // $farm_activity = "INSERT INTO farm_activities (farm_id, crop, harvest_date, total_yield, warehouse_to_be_delivered_to) VALUES ('$farm_id', '$crop', '$harvest_date', '$total_yield', '$warehouse_to_be_delivered_to')";
-    // $result = mysqli_query($dbconnect, $farm_activity);
+    $farm_activity = "INSERT INTO farm_activities (farm_id, crop, harvest_date, total_yield, warehouse_to_be_delivered_to) VALUES ('$farm_id', '$crop', '$harvest_date', '$total_yield', '$warehouse_to_be_delivered_to')";
+    $result = mysqli_query($dbconnect, $farm_activity);
     // if ($result) {
     //     header('location: ../tickets.php?farm_id=' . $farm_id . '&type=success&msg=Farm activity added successfully');
     //     exit();

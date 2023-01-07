@@ -188,19 +188,19 @@ include "includes/config.php";
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="deptwo" class="form-label">Crop</label>
-                                        <input type="text" class="form-control" name="crop" id="deptwo">
+                                        <input type="text" class="form-control" name="crop" id="deptwo" required>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="deptwo" class="form-label">Harvest Date</label>
-                                        <input type="date" class="form-control" name="harvest_date" id="deptwo">
+                                        <input type="date" class="form-control" name="harvest_date" id="deptwo" required>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="deptwo" class="form-label">Total Yield</label>
-                                        <input type="number" class="form-control" name="total_yield" id="deptwo">
+                                        <input type="number" class="form-control" name="total_yield" id="deptwo" required>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="deptwo" class="form-label">Warehouse to be delivered to</label>
-                                        <input type="text" class="form-control" name="warehouse_to_be_delivered_to" id="deptwo">
+                                        <input type="text" class="form-control" name="warehouse_to_be_delivered_to" id="deptwo" required>
                                     </div>
 
                                 </div>

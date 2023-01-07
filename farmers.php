@@ -68,6 +68,8 @@ include "includes/config.php";
                                                 while ($FarmersRow = mysqli_fetch_array($resultFarmers)) {
                                                     $id_id = $FarmersRow['id'];
                                                     $id = $FarmersRow['unique_id'];
+                                                    $first_name = $FarmersRow['first_name'];
+                                                    $last_name = $FarmersRow['last_name'];
                                                     $name = $FarmersRow['last_name'] . ' ' . $FarmersRow['first_name'];
                                                     $email = $FarmersRow['email'];
                                                     $input_crop = $FarmersRow['input_crop'];
@@ -125,30 +127,34 @@ include "includes/config.php";
                                                                             </div>
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">First Name</label>
-                                                                                <input type="text" class="form-control" id="exampleInputEmail1" name="first_name" aria-describedby="emailHelp" placeholder="Enter First Name">
+                                                                                <input type="text" class="form-control" id="exampleInputEmail1" name="first_name" value="<?php echo $first_name; ?>" aria-describedby="emailHelp" placeholder="Enter First Name">
                                                                             </div>
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">Last Name</label>
-                                                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="last_name" placeholder="Enter Last Name">
+                                                                                <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $last_name; ?>" aria-describedby="emailHelp" name="last_name" placeholder="Enter Last Name">
                                                                             </div>
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">Phone Number</label>
-                                                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="phone_number" placeholder="Enter Phone Number">
+                                                                                <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $phone; ?>" aria-describedby="emailHelp" name="phone_number" placeholder="Enter Phone Number">
                                                                             </div>
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">Date Of Birth</label>
-                                                                                <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="date_of_birth" placeholder="Enter Date Of Birth">
+                                                                                <input type="date" class="form-control" id="exampleInputEmail1" value="<?php echo $date_of_birth; ?>" aria-describedby="emailHelp" name="date_of_birth" placeholder="Enter Date Of Birth">
                                                                             </div>
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">Enter type of Crop</label>
-                                                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="input_crop" placeholder="Enter Crop">
+                                                                                <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $input_crop; ?>" aria-describedby="emailHelp" name="input_crop" placeholder="Enter Crop">
                                                                             </div>
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">Gender</label>
                                                                                 <select name="gender" id="" class="form-control">
                                                                                     <option>Select your gender</option>
-                                                                                    <option value="Male">Male</option>
-                                                                                    <option value="Female">Female</option>
+                                                                                    <option <?php if ($gender == 'Male') {
+                                                                                                echo 'selected';
+                                                                                            } ?> value="Male">Male</option>
+                                                                                    <option <?php if ($gender == 'Female') {
+                                                                                                echo 'selected';
+                                                                                            } ?> value="Female">Female</option>
                                                                                 </select>
                                                                             </div>
                                                                             <div class="form-group col-md-6 mb-4">
@@ -189,13 +195,17 @@ include "includes/config.php";
                                                                                 <div class="row">
                                                                                     <div class="col-md-4">
                                                                                         <div class="form-check">
-                                                                                            <input class="form-check-input" type="radio" name="did_you_have_children" id="exampleRadios11" value="Yes">
+                                                                                            <input class="form-check-input" <?php if ($have_children == 'Yes') {
+                                                                                                                                echo 'checked';
+                                                                                                                            } ?> type="radio" name="did_you_have_children" id="exampleRadios11" value="Yes">
                                                                                             <label class="form-check-label" for="exampleRadios11"> Yes</label>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-md-4">
                                                                                         <div class="form-check">
-                                                                                            <input class="form-check-input" type="radio" name="did_you_have_children" id="exampleRadios22" value="No">
+                                                                                            <input class="form-check-input" <?php if ($have_children == 'No') {
+                                                                                                                                echo 'checked';
+                                                                                                                            } ?> type="radio" name="did_you_have_children" id="exampleRadios22" value="No">
                                                                                             <label class="form-check-label" for="exampleRadios22">No </label>
                                                                                         </div>
                                                                                     </div>
@@ -203,67 +213,74 @@ include "includes/config.php";
                                                                             </div>
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">Numbers of Children</label>
-                                                                                <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="numbers_of_children" placeholder="Numbers of Children">
+                                                                                <input type="number" class="form-control" id="exampleInputEmail1" value="<?php echo $numbers_of_children; ?>" aria-describedby="emailHelp" name="numbers_of_children" placeholder="Numbers of Children">
                                                                             </div>
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">Are your children enrolled in school</label>
                                                                                 <select name="is_children_in_school" class="form-control" id="">
                                                                                     <option>Select your option</option>
-                                                                                    <option value="Yes private school">Yes private school</option>
-                                                                                    <option value="Yes public school">Yes public school</option>
-                                                                                    <option value="No not in school">No</option>
+                                                                                    <option <?php if ($is_children_in_school == 'Yes private school') {
+                                                                                                echo 'selected';
+                                                                                            } ?> value="Yes private school">Yes private school</option>
+                                                                                    <option <?php if ($is_children_in_school == 'Yes public school') {
+                                                                                                echo 'selected';
+                                                                                            } ?> value="Yes public school">Yes public school</option>
+                                                                                    <option <?php if ($is_children_in_school == 'No not in school') {
+                                                                                                echo 'selected';
+                                                                                            } ?> value="No not in school">No</option>
                                                                                 </select>
                                                                             </div>
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">Average monthly income (₦)</label>
-                                                                                <input type="number" min="1000.00" step="0.01" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="average_monthly_income" placeholder="Enter average montly income">
+                                                                                <input type="number" min="1000.00" step="0.01" class="form-control" id="exampleInputEmail1" value="<?php echo $average_monthly_income; ?>" aria-describedby="emailHelp" name="average_monthly_income" placeholder="Enter average montly income">
                                                                             </div>
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">Any source of income apart from agriculture? If yes state it here</label>
-                                                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="other_income" placeholder="Do you have any other source of income apart from agriculture?">
+                                                                                <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $other_income; ?>" aria-describedby="emailHelp" name="other_income" placeholder="Do you have any other source of income apart from agriculture?">
                                                                             </div>
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">Land size (Archers)</label>
-                                                                                <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="land_size" placeholder="Enter Land size">
+                                                                                <input type="number" class="form-control" id="exampleInputEmail1" value="<?php echo $land_size; ?>" aria-describedby="emailHelp" name="land_size" placeholder="Enter Land size">
                                                                             </div>
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">Land coordinate <code>e.g 20x10</code></label>
-                                                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="land_coordinate" placeholder="Enter Land coordinate">
+                                                                                <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $land_coordinate; ?>" aria-describedby="emailHelp" name="land_coordinate" placeholder="Enter Land coordinate">
                                                                             </div>
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">Land picture</label>
-                                                                                <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="land_picture" placeholder="upload land picture">
+                                                                                <input type="file" class="form-control" id="exampleInputEmail1" value="<?php echo $land_picture; ?>" aria-describedby="emailHelp" name="land_picture" placeholder="upload land picture">
                                                                             </div>
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">Upload your profile picture</label>
-                                                                                <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="profile_picture" placeholder="Upload profile Picture">
+                                                                                <input type="file" class="form-control" id="exampleInputEmail1" value="<?php echo
+                                                                                                                                                        $upload_profile_picture; ?>" aria-describedby="emailHelp" name="profile_picture" placeholder="Upload profile Picture">
                                                                             </div>
 
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">Farm location</label>
-                                                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="farm_location" placeholder="Enter Farm location">
+                                                                                <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $farm_location; ?>" aria-describedby="emailHelp" name="farm_location" placeholder="Enter Farm location">
                                                                             </div>
 
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">Home address</label>
-                                                                                <input type="text" class="form-control" id="exampleInputEmail1" aria- zdescribedby="emailHelp" name="home_address" placeholder="Enter Home Address">
+                                                                                <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $home_address; ?>" aria- zdescribedby="emailHelp" name="home_address" placeholder="Enter Home Address">
                                                                             </div>
 
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">State of origin</label>
-                                                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="state_of_origin" placeholder="Enter state of origin">
+                                                                                <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $state_of_origin; ?>" aria-describedby="emailHelp" name="state_of_origin" placeholder="Enter state of origin">
                                                                             </div>
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">Natonality</label>
-                                                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nationality" placeholder="Enter name of Country">
+                                                                                <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $nationality; ?>" aria-describedby="emailHelp" name="nationality" placeholder="Enter name of Country">
                                                                             </div>
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">Upload National means of identity</label>
-                                                                                <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="national_means_of_identity" placeholder="Upload National means of identity">
+                                                                                <input type="file" class="form-control" id="exampleInputEmail1" value="<?php echo $national_means_of_identity; ?>" aria-describedby="emailHelp" name="national_means_of_identity" placeholder="Upload National means of identity">
                                                                             </div>
                                                                             <div class="form-group col-md-6 mb-4">
                                                                                 <label class="mb-2" for="exampleInputEmail1">Resciept of commitment Fee</label>
-                                                                                <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="reciept_of_commitment" placeholder="Upload commitment fee reciept">
+                                                                                <input type="file" class="form-control" id="exampleInputEmail1" value="<?php echo $reciept_of_commitment; ?>" aria-describedby="emailHelp" name="reciept_of_commitment" placeholder="Upload commitment fee reciept">
                                                                             </div>
                                                                             <button class="btn btn-primary" name="onboardfarmer"> Submit</button>
                                                                             <!-- </div> -->
@@ -514,30 +531,37 @@ include "includes/config.php";
 
                                                                                                     <!-- view image and documents -->
                                                                                                     <div class="row">
-                                                                                                        <div class="card col-md-6">
-                                                                                                            <iframe src="<?php echo $national_means_of_identity; ?>" width="100%" height="200px"></iframe>
-                                                                                                            <div class="card-body">
-                                                                                                                <span class="card-title">Upload national means of identification</span>
+                                                                                                        <a target="_blank" href="<?php echo $national_means_of_identity; ?>">
+                                                                                                            <div class="card col-md-6">
+                                                                                                                <iframe src="<?php echo $national_means_of_identity; ?>" width="100%" height="200px"></iframe>
+                                                                                                                <div class="card-body">
+                                                                                                                    <span class="card-title">Upload national means of identification</span>
+                                                                                                                </div>
                                                                                                             </div>
-                                                                                                        </div>
-                                                                                                        <div class="card col-md-6">
-                                                                                                            <iframe src="<?php echo $land_picture; ?>" width="100%" height="200px"></iframe>
-                                                                                                            <div class="card-body">
-                                                                                                                <span class="card-title fw-bold">Land picture</span>
+                                                                                                        </a>
+                                                                                                        <a target="_blank" href="<?php echo $land_picture; ?>">
+                                                                                                            <div class="card col-md-6">
+                                                                                                                <iframe src="<?php echo $land_picture; ?>" width="100%" height="200px"></iframe>
+                                                                                                                <div class="card-body">
+                                                                                                                    <span class="card-title fw-bold">Land picture</span>
+                                                                                                                </div>
                                                                                                             </div>
-                                                                                                        </div>
-                                                                                                        <div class="card col-md-6">
-                                                                                                            <iframe src="<?php echo $commitment_fee; ?>" width="100%" height="200px"></iframe>
+                                                                                                        </a>
+                                                                                                        <!-- <div class="card col-md-6">
+                                                                                                            <iframe src="<?php //echo $commitment_fee; 
+                                                                                                                            ?>" width="100%" height="200px"></iframe>
                                                                                                             <div class="card-body">
                                                                                                                 <span class="card-title fw-bold">Commitment fee</span>
                                                                                                             </div>
-                                                                                                        </div>
-                                                                                                        <div class="card col-md-6">
-                                                                                                            <iframe src="<?php echo $reciept_of_commitment; ?>" width="100%" height="200px"></iframe>
-                                                                                                            <div class="card-body">
-                                                                                                                <span class="card-title fw-bold">Receipt of commitment fee</span>
+                                                                                                        </div> -->
+                                                                                                        <a target="_blank" href="<?php echo $reciept_of_commitment; ?>">
+                                                                                                            <div class="card col-md-6">
+                                                                                                                <iframe src="<?php echo $reciept_of_commitment; ?>" width="100%" height="200px"></iframe>
+                                                                                                                <div class="card-body">
+                                                                                                                    <span class="card-title fw-bold">Receipt of commitment fee</span>
+                                                                                                                </div>
                                                                                                             </div>
-                                                                                                        </div>
+                                                                                                        </a>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>

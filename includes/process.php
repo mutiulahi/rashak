@@ -354,8 +354,8 @@ if (isset($_POST['delete'])) {
         $location_error = '../' . $redirect . '.php?farm_id=' . $_POST['farm_id'] . '&type=error&msg=Error deleting';
     } else {
 
-        $location_success = '../' . $redirect . 'php?type=success&msg=Deleted successfully';
-        $location_error = '../' . $redirect . 'php?type=error&msg=Error deleting';
+        $location_success = '../' . $redirect . '.php?type=success&msg=Deleted successfully';
+        $location_error = '../' . $redirect . '.php?type=error&msg=Error deleting';
     }
     if ($delete_query) {
         header('location: ' . $location_success);

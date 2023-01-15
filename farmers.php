@@ -109,15 +109,15 @@ include "includes/config.php";
                                                         <td><?php echo $input_crop; ?></td>
                                                         <td>
                                                             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editproject<?php echo substr($id, -2); ?>"><i class="icofont-edit text-success"></i></button>
-                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#checklist<?php echo substr($id, -2); ?>">monitor field</button>
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editproject<?php echo $id_id; ?>"><i class="icofont-edit text-success"></i></button>
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#checklist<?php echo $id_id; ?>">monitor field</button>
                                                                 <a href="tickets.php?farm_id=<?php echo $id; ?>" class="btn btn-outline-secondary">harvest</a>
-                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#details<?php echo substr($id, -2); ?>">view</button>
-                                                                <button type="button" class="btn btn-outline-secondary deleterow" data-bs-toggle="modal" data-bs-target="#deleteproject<?php echo substr($id, -2); ?>"><i class="icofont-ui-delete text-danger"></i></button>
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#details<?php echo $id_id; ?>">view</button>
+                                                                <button type="button" class="btn btn-outline-secondary deleterow" data-bs-toggle="modal" data-bs-target="#deleteproject<?php echo $id_id; ?>"><i class="icofont-ui-delete text-danger"></i></button>
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <div class="modal fade" id="editproject<?php echo substr($id, -2); ?>" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal fade" id="editproject<?php echo $id_id; ?>" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -298,7 +298,7 @@ include "includes/config.php";
                                                         </div>
                                                     </div>
 
-                                                    <div class="modal fade" id="deleteproject<?php echo substr($id, -2); ?>" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal fade" id="deleteproject<?php echo $id_id; ?>" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -323,7 +323,7 @@ include "includes/config.php";
                                                     </div>
 
                                                     <!-- Edit Modal -->
-                                                    <div class="modal fade" id="editproject<?php echo substr($id, -2); ?>" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal fade" id="editproject<?php echo $id_id; ?>" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -355,7 +355,7 @@ include "includes/config.php";
                                                         </div>
                                                     </div>
                                                     <!-- check list -->
-                                                    <div class="modal fade" id="checklist<?php echo substr($id, -2); ?>" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal fade" id="checklist<?php echo $id_id; ?>" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -601,7 +601,7 @@ include "includes/config.php";
 
 
                                                     <!-- details -->
-                                                    <div class="modal fade" id="details<?php echo substr($id, -2); ?>" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal fade" id="details<?php echo $id_id; ?>" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">

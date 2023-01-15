@@ -52,6 +52,13 @@ include "includes/config.php";
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>';
                                     } ?>
+                                     <?php
+                                    if (isset($_GET['type']) && $_GET['type'] == 'error') {
+                                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>Hoops!</strong> ' . $_GET['msg'] . '
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>';
+                                    } ?>
                                     <table id="myProjectTable" class="table table-hover align-middle mb-0" style="width:100%">
                                         <thead>
                                             <tr>
@@ -334,7 +341,7 @@ include "includes/config.php";
                                                                                     <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" id="exampleFormControlInput77" placeholder="Fullname">
                                                                                     <div class="col-sm-12">
                                                                                         <label for="formFileMultipleone" class="form-label">Email</label>
-                                                                                        <input class="form-control" type="email" value="<?php echo $email; ?>" name="email" id="formFileMultipleone" multiple>
+                                                                                        <input class="form-control" type="email" value="<?php echo $email; ?>" name="email" id="formFileMultipleone" >
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -349,14 +356,14 @@ include "includes/config.php";
                                                     </div>
                                                     <!-- check list -->
                                                     <div class="modal fade" id="checklist<?php echo substr($id, -2); ?>" tabindex="-1" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+                                                        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title  fw-bold" id="editprojectLabel">Farmar's Check List</h5>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <form action="includes/process.php" method="post">
+                                                                    <form action="includes/process.php" method="post" enctype="multipart/form-data">
                                                                         <input type="hidden" class="form-control" name="redirect" value="farmers.php">
                                                                         <input type="hidden" class="form-control" name="id" value="<?php echo $id ?>">
                                                                         <div class="deadline-form">
@@ -372,8 +379,14 @@ include "includes/config.php";
                                                                                         $pre_emerg_herbicide = $result_data['pre_emerg_herbicide_app'];
                                                                                         $planted = $result_data['planted'];
                                                                                         $post_emerg_herbicide = $result_data['post_emerg_herbicide_app'];
-                                                                                        $fertilized = $result_data['fertilized'];
+                                                                                        $weeding = $result_data['weeding'];
+                                                                                        $watering = $result_data['watering'];
+                                                                                        $first_fertilized = $result_data['first_fertilized'];
+                                                                                        $second_fertilized = $result_data['second_fertilized'];
                                                                                         $harvest = $result_data['harvest'];
+
+                                                                                        $documents = $result_data['documents'];
+                                                                                        $documents = json_decode($documents, true);
                                                                                     }
                                                                                     if (empty($training)) {
                                                                                         $training = 'No';
@@ -401,34 +414,184 @@ include "includes/config.php";
                                                                                     </div>
 
                                                                                     <div class="col-sm-12 mb-3">
-                                                                                        <label for="formFileMultipleone" class="form-label">Received input date</label>
-                                                                                        <input type="date" class="form-control" value="<?php echo $receiveid_input; ?>" name="receiveid_input" id="">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-6">
+                                                                                                <label for="formFileMultipleone" class="form-label">Received input date</label>
+                                                                                                <input type="date" class="form-control" value="<?php echo $receiveid_input; ?>" name="receiveid_input" id="">
+                                                                                            </div>
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="col-md-12">
+                                                                                                    <label for="formFileMultipleone" class="form-label">Upload Picture to proof the activity</label>
+                                                                                                    <input class="form-control" type="file"  name="receiveid_input_picture" id="formFileMultipleone" >
+                                                                                                </div>
+                                                                                                <?php if (array_key_exists('receiveid_input_picture', $documents)) { ?>
+                                                                                                    <div class="col-md-12 mt-2">
+                                                                                                        <a href="uploads/activity/<?php echo $documents['receiveid_input_picture']; ?>" for="formFileMultipleone" target="_blank" class="text-white btn btn-sm btn-success"><i>Download uploaded document</i></a>
+                                                                                                    </div>
+                                                                                                <?php } ?>
+                                                                                            </div>
+                                                                                        </div>
                                                                                     </div>
                                                                                     <div class="col-sm-12 mb-3">
-                                                                                        <label for="formFileMultipleone" class="form-label">Pre Emergence Herbicide Application Data</label>
-                                                                                        <input type="date" class="form-control" value="<?php echo $pre_emerg_herbicide; ?>" name="pre_emerg_herbicide_app" id="">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-6">
+                                                                                                <label for="formFileMultipleone" class="form-label">Pre Emergence Herbicide Application Data</label>
+                                                                                                <input type="date" class="form-control" value="<?php echo $pre_emerg_herbicide; ?>" name="pre_emerg_herbicide_app" id="">
+                                                                                            </div>
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="col-md-12">
+                                                                                                    <label for="formFileMultipleone" class="form-label">Upload Picture to proof the activity</label>
+                                                                                                    <input class="form-control" type="file" name="pre_emerg_herbicide_picture" id="formFileMultipleone" >
+                                                                                                </div>
+                                                                                                <?php if (array_key_exists('pre_emerg_herbicide_picture', $documents)) { ?>
+                                                                                                    <div class="col-md-12 mt-2">
+                                                                                                        <a href="uploads/activity/<?php echo $documents['pre_emerg_herbicide_picture']; ?>" for="formFileMultipleone" target="_blank" class="text-white btn btn-sm btn-success"><i>Download uploaded document</i></a>
+                                                                                                    </div>
+                                                                                                <?php } ?>
+                                                                                            </div>
+                                                                                        </div>
                                                                                     </div>
                                                                                     <div class="col-sm-12 mb-3">
-                                                                                        <label for="formFileMultipleone" class="form-label">Planted date</label>
-                                                                                        <input type="date" class="form-control" value="<?php echo $planted; ?>" name="planted" id="">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-6">
+                                                                                                <label for="formFileMultipleone" class="form-label">Planted date</label>
+                                                                                                <input type="date" class="form-control" value="<?php echo $planted; ?>" name="planted" id="">
+                                                                                            </div>
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="col-md-12">
+                                                                                                    <label for="formFileMultipleone" class="form-label">Upload Picture to proof the activity</label>
+                                                                                                    <input class="form-control" type="file" name="planted_picture" id="formFileMultipleone" >
+                                                                                                </div>
+                                                                                                <?php if (array_key_exists('planted_picture', $documents)) { ?>
+                                                                                                    <div class="col-md-12 mt-2">
+                                                                                                        <a href="uploads/activity/<?php echo $documents['planted_picture']; ?>" for="formFileMultipleone" target="_blank" class="text-white btn btn-sm btn-success"><i>Download uploaded document</i></a>
+                                                                                                    </div>
+                                                                                                <?php } ?>
+                                                                                                
+                                                                                            </div>
+                                                                                        </div>
                                                                                     </div>
                                                                                     <div class="col-sm-12 mb-3">
-                                                                                        <label for="formFileMultipleone" class="form-label">Post Emergence Herbicide Application Data</label>
-                                                                                        <input type="date" class="form-control" value="<?php echo $post_emerg_herbicide; ?>" name="post_emerg_herbicide_app" id="">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-6">
+                                                                                                <label for="formFileMultipleone" class="form-label">Post Emergence Herbicide Application Data</label>
+                                                                                                <input type="date" class="form-control" value="<?php echo $post_emerg_herbicide; ?>" name="post_emerg_herbicide_app" id="">
+                                                                                            </div>
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="col-md-12">
+                                                                                                    <label for="formFileMultipleone" class="form-label">Upload Picture to proof the activity</label>
+                                                                                                    <input class="form-control" type="file" name="post_emerg_herbicide_app_picture" id="formFileMultipleone" >
+                                                                                                </div>
+                                                                                                <?php if (array_key_exists('post_emerg_herbicide_app_picture', $documents)) { ?>
+                                                                                                    <div class="col-md-12 mt-2">
+                                                                                                        <a href="uploads/activity/<?php echo $documents['post_emerg_herbicide_app_picture']; ?>" for="formFileMultipleone" target="_blank" class="text-white btn btn-sm btn-success"><i>Download uploaded document</i></a>
+                                                                                                    </div>
+                                                                                                <?php } ?>
+                                                                                            </div>
+                                                                                        </div>
                                                                                     </div>
                                                                                     <div class="col-sm-12 mb-3">
-                                                                                        <label for="formFileMultipleone" class="form-label">Fertilized Date</label>
-                                                                                        <input type="date" class="form-control" value="<?php echo $fertilized; ?>" name="fertilized" id="">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-6">
+                                                                                                <label for="formFileMultipleone" class="form-label">First fertilizer Appllied Date</label>
+                                                                                                <input type="date" class="form-control" value="<?php echo $first_fertilized; ?>" name="first_fertilized" id="">
+                                                                                            </div>
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="col-md-12">
+                                                                                                    <label for="formFileMultipleone" class="form-label">Upload Picture to proof the activity</label>
+                                                                                                    <input class="form-control" type="file" name="first_fertilized_picture" id="formFileMultipleone" >
+                                                                                                </div>
+                                                                                                <?php if (array_key_exists('first_fertilized_picture', $documents)) { ?>
+                                                                                                    <div class="col-md-12 mt-2">
+                                                                                                        <a href="uploads/activity/<?php echo $documents['first_fertilized_picture']; ?>" for="formFileMultipleone" target="_blank" class="text-white btn btn-sm btn-success"><i>Download uploaded document</i></a>
+                                                                                                    </div>
+                                                                                                <?php } ?>
+
+                                                                                            </div>
+                                                                                        </div>
+
                                                                                     </div>
                                                                                     <div class="col-sm-12 mb-3">
-                                                                                        <label for="formFileMultipleone" class="form-label">Harvest Date</label>
-                                                                                        <input type="date" class="form-control" value="<?php echo $harvest; ?>" name="harvest" id="">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-6">
+                                                                                                <label for="formFileMultipleone" class="form-label">Second fertilizer Appllied Date</label>
+                                                                                                <input type="date" class="form-control" value="<?php echo $second_fertilized; ?>" name="second_fertilized" id="">
+                                                                                            </div>
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="col-md-12">
+                                                                                                    <label for="formFileMultipleone" class="form-label">Upload Picture to proof the activity</label>
+                                                                                                    <input class="form-control" type="file" name="second_fertilized_picture" id="formFileMultipleone" >
+                                                                                                </div>
+                                                                                                <?php if (array_key_exists('second_fertilized_picture', $documents)) { ?>
+                                                                                                    <div class="col-md-12 mt-2">
+                                                                                                        <a href="uploads/activity/<?php echo $documents['second_fertilized_picture']; ?>" for="formFileMultipleone" target="_blank" class="text-white btn btn-sm btn-success"><i>Download uploaded document</i></a>
+                                                                                                    </div>
+                                                                                                <?php } ?>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-sm-12 mb-3">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-6">
+                                                                                                <label for="formFileMultipleone" class="form-label">Weeding</label>
+                                                                                                <input type="date" class="form-control" value="<?php echo $weeding; ?>" name="weeding" id="">
+                                                                                            </div>
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="col-md-12">
+                                                                                                    <label for="formFileMultipleone" class="form-label">Upload Picture to proof the activity</label>
+                                                                                                    <input class="form-control" type="file" name="weeding_picture" id="formFileMultipleone" >
+                                                                                                </div>
+                                                                                                <?php if (array_key_exists('weeding_picture', $documents)) { ?>
+                                                                                                    <div class="col-md-12 mt-2">
+                                                                                                        <a href="uploads/activity/<?php echo $documents['weeding_picture']; ?>" for="formFileMultipleone" target="_blank" class="text-white btn btn-sm btn-success"><i>Download uploaded document</i></a>
+                                                                                                    </div>
+                                                                                                <?php } ?>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-sm-12 mb-3">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-6">
+                                                                                                <label for="formFileMultipleone" class="form-label">Watering</label>
+                                                                                                <input type="date" class="form-control" value="<?php echo $watering; ?>" name="watering" id="">
+                                                                                            </div>
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="col-md-12">
+                                                                                                    <label for="formFileMultipleone" class="form-label">Upload Picture to proof the activity</label>
+                                                                                                    <input class="form-control" type="file" name="watering_picture" id="formFileMultipleone" >
+                                                                                                </div>
+                                                                                                <?php if (array_key_exists('watering_picture', $documents)) { ?>
+                                                                                                    <div class="col-md-12 mt-2">
+                                                                                                        <a href="uploads/activity/<?php echo $documents['watering_picture']; ?>" for="formFileMultipleone" target="_blank" class="text-white btn btn-sm btn-success"><i>Download uploaded document</i></a>
+                                                                                                    </div>
+                                                                                                <?php } ?>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-sm-12 mb-3">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-6">
+                                                                                                <label for="formFileMultipleone" class="form-label">Harvest Date</label>
+                                                                                                <input type="date" class="form-control" value="<?php echo $harvest; ?>" name="harvest" id="">
+                                                                                            </div>
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="col-md-12">
+                                                                                                    <label for="formFileMultipleone" class="form-label">Upload Picture to proof the activity</label>
+                                                                                                    <input class="form-control" type="file" name="harvest_picture" id="formFileMultipleone" >
+                                                                                                </div>
+                                                                                                <?php if (array_key_exists('harvest_picture', $documents)) { ?>
+                                                                                                    <div class="col-md-12 mt-2">
+                                                                                                        <a href="uploads/activity/<?php echo $documents['harvest_picture']; ?>" for="formFileMultipleone" target="_blank" class="text-white btn btn-sm btn-success"><i>Download uploaded document</i></a>
+                                                                                                    </div>
+                                                                                                <?php } ?>
+                                                                                            </div>
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="submit" name="update_farmer_check_list" class="btn btn-primary">Update</button>
+                                                                            <button type="submit" name="check_list" class="btn btn-primary">Update</button>
                                                                         </div>
                                                                     </form>
                                                                 </div>

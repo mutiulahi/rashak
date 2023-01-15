@@ -62,17 +62,18 @@ if (isset($_POST['add_farm'])) {
 }
 
 // add new farm activity
-if (isset($_POST['harvest'])) {
+if (isset($_POST['harvest_button'])) {
     // Get form data and store in variables also sanitize data
     $farm_id = mysqli_real_escape_string($dbconnect, $_POST['farm_id']);
     $crop = mysqli_real_escape_string($dbconnect, $_POST['crop']);
     $harvest_date = mysqli_real_escape_string($dbconnect, $_POST['harvest_date']);
     $total_yield = mysqli_real_escape_string($dbconnect, $_POST['total_yield']);
+    $total_yield_rashak = mysqli_real_escape_string($dbconnect, $_POST['total_yield_rashak']);
     $warehouse_to_be_delivered_to = mysqli_real_escape_string($dbconnect, $_POST['warehouse_to_be_delivered_to']);
     // $status = 1;
 
     // insert to db in farm_details
-    $farm_activity = "INSERT INTO farm_activities (farm_id, crop, harvest_date, total_yield, warehouse_to_be_delivered_to, status) VALUES ('$farm_id', '$crop', '$harvest_date', '$total_yield', '$warehouse_to_be_delivered_to', '1')";
+    $farm_activity = "INSERT INTO farm_activities (farm_id, crop, harvest_date, total_yield, total_yield_rashak, warehouse_to_be_delivered_to, status) VALUES ('$farm_id', '$crop', '$harvest_date', '$total_yield', '$total_yield_rashak', '$warehouse_to_be_delivered_to', '1')";
     $result = mysqli_query($dbconnect, $farm_activity);
     if ($result) {
         header('location: ../tickets.php?farm_id=' . $farm_id . '&type=success&msg=Farm activity added successfully');
@@ -90,11 +91,12 @@ if (isset($_POST['harvest_edit'])) {
     $crop = mysqli_real_escape_string($dbconnect, $_POST['crop']);
     $harvest_date = mysqli_real_escape_string($dbconnect, $_POST['harvest_date']);
     $total_yield = mysqli_real_escape_string($dbconnect, $_POST['total_yield']);
+    $total_yield_rashak = mysqli_real_escape_string($dbconnect, $_POST['total_yield_rashak']);
     $warehouse_to_be_delivered_to = mysqli_real_escape_string($dbconnect, $_POST['warehouse_to_be_delivered_to']);
     $status = 1;
 
     // edit to db in farm_details
-    $farm_activity = "UPDATE farm_activities SET `crop` = '$crop', `harvest_date` = '$harvest_date', `total_yield` = '$total_yield', `warehouse_to_be_delivered_to` = '$warehouse_to_be_delivered_to' WHERE `farm_id` = '$farm_id'";
+    $farm_activity = "UPDATE farm_activities SET `crop` = '$crop', `harvest_date` = '$harvest_date', `total_yield` = '$total_yield', `total_yield_rashak` = '$total_yield_rashak', `warehouse_to_be_delivered_to` = '$warehouse_to_be_delivered_to' WHERE `farm_id` = '$farm_id'";
 
     $result = mysqli_query($dbconnect, $farm_activity);
     if ($result) {
@@ -289,56 +291,7 @@ if (isset($_POST['onboardfarmer'])) {
     }
 }
 
-// update farmer check list 
-if (isset($_POST['update_farmer_check_list'])) {
 
-
-    if (!isset($_POST['training'])) {
-        $training = null;
-    } else {
-        $training = mysqli_real_escape_string($dbconnect, $_POST['training']);
-    }
-    if (!isset($_POST['land_preparation'])) {
-        $land_preparation = null;
-    } else {
-        $land_preparation = mysqli_real_escape_string($dbconnect, $_POST['land_preparation']);
-    }
-
-    $receiveid_input = mysqli_real_escape_string($dbconnect, $_POST['receiveid_input']);
-    $pre_emerg_herbicide = mysqli_real_escape_string($dbconnect, $_POST['pre_emerg_herbicide_app']);
-    $planted = mysqli_real_escape_string($dbconnect, $_POST['planted']);
-    $post_emerg_herbicide = mysqli_real_escape_string($dbconnect, $_POST['post_emerg_herbicide_app']);
-    $fertilized = mysqli_real_escape_string($dbconnect, $_POST['fertilized']);
-    $harvest = mysqli_real_escape_string($dbconnect, $_POST['harvest']);
-    $farmer_id = mysqli_real_escape_string($dbconnect, $_POST['id']);
-
-    //     find the farmer
-    $find_farmer = "SELECT * FROM farmer_check_lists WHERE farmer_id = '$farmer_id'";
-    $find_farmer_query = mysqli_query($dbconnect, $find_farmer);
-    if (mysqli_num_rows($find_farmer_query) == 0) {
-        // insert farmer check list
-        $insert_farmer_check_list = "INSERT INTO farmer_check_lists(farmer_id, training, land_preparation, receiveid_input, pre_emerg_herbicide_app, planted, post_emerg_herbicide_app, fertilized, harvest) VALUES 
-        ('$farmer_id', '$training', '$land_preparation', '$receiveid_input', '$pre_emerg_herbicide', '$planted', '$post_emerg_herbicide', '$fertilized', '$harvest')";
-        $insert_farmer_check_list_query = mysqli_query($dbconnect, $insert_farmer_check_list);
-        if ($insert_farmer_check_list_query) {
-            header('location: ../farmers.php?type=success&msg=Farmer check list updated successfully');
-            exit();
-        } else {
-            header('location: ../farmers.php?type=error&msg=Error updating farmer check list');
-            exit();
-        }
-    } else {
-        $update_farmer_check_list = "UPDATE farmer_check_lists SET training = '$training', land_preparation = '$land_preparation', receiveid_input = '$receiveid_input', pre_emerg_herbicide_app = '$pre_emerg_herbicide', planted = '$planted', post_emerg_herbicide_app = '$post_emerg_herbicide', fertilized = '$fertilized', harvest = '$harvest' WHERE farmer_id = '$farmer_id'";
-        $update_farmer_check_list_query = mysqli_query($dbconnect, $update_farmer_check_list);
-        if ($update_farmer_check_list_query) {
-            header('location: ../farmers.php?type=success&msg=Farmer check list updated successfully');
-            exit();
-        } else {
-            header('location: ../farmers.php?type=error&msg=Error updating farmer check list');
-            exit();
-        }
-    }
-}
 
 // delete from any table and redirect to page 
 if (isset($_POST['delete'])) {
@@ -362,6 +315,110 @@ if (isset($_POST['delete'])) {
         exit();
     } else {
         header('location: ' . $location_error);
+        exit();
+    }
+}
+
+// update farmer check list 
+if (isset($_POST['check_list'])) {
+
+
+    if (!isset($_POST['training'])) {
+        $training = null;
+    } else {
+        $training = mysqli_real_escape_string($dbconnect, $_POST['training']);
+    }
+    if (!isset($_POST['land_preparation'])) {
+        $land_preparation = null;
+    } else {
+        $land_preparation = mysqli_real_escape_string($dbconnect, $_POST['land_preparation']);
+    }
+
+    $receiveid_input = mysqli_real_escape_string($dbconnect, $_POST['receiveid_input']);
+    $pre_emerg_herbicide = mysqli_real_escape_string($dbconnect, $_POST['pre_emerg_herbicide_app']);
+    $planted = mysqli_real_escape_string($dbconnect, $_POST['planted']);
+    $post_emerg_herbicide = mysqli_real_escape_string($dbconnect, $_POST['post_emerg_herbicide_app']);
+    $harvest = mysqli_real_escape_string($dbconnect, $_POST['harvest']);
+    $weeding = mysqli_real_escape_string($dbconnect, $_POST['weeding']);
+    $watering = mysqli_real_escape_string($dbconnect, $_POST['watering']);
+    $first_fertilized = mysqli_real_escape_string($dbconnect, $_POST['first_fertilized']);
+    $second_fertilized = mysqli_real_escape_string($dbconnect, $_POST['second_fertilized']);
+    $farmer_id = mysqli_real_escape_string($dbconnect, $_POST['id']);
+
+
+    $allowed = array('jpg', 'jpeg', 'png');
+    foreach ($_FILES as $key => $file) {
+        if ($file['size'] > 0) {
+            $file_name =  strtolower(uniqid() . $file['name']);
+            $file_type = $key;
+            $file_temp = $file['tmp_name'];
+            $file_destination = '../uploads/activity/' . $file_name;
+            $file_extension = pathinfo($file_name, PATHINFO_EXTENSION);
+            $file_extension = strtolower($file_extension);
+            if (!in_array($file_extension, $allowed)) {
+                $file_error[] = $file_type;
+            } else {
+                move_uploaded_file($file_temp, $file_destination);
+                $documents[$file_type] =  $file_name;
+            }
+        }
+    }
+
+    // get the jsson doc in the database and update it 
+    $get_json = "SELECT documents FROM farmer_check_lists WHERE farmer_id = '$farmer_id'";
+    $get_json_query = mysqli_query($dbconnect, $get_json);
+    $get_json_result = mysqli_fetch_assoc($get_json_query);
+    $json = $get_json_result['documents'];
+    if ($json != null) {
+        $json = json_decode($json, true);
+        foreach ($documents as $key => $value) {
+            if (array_key_exists($key, $json)) {
+                $json[$key] = $value;
+            } else {
+                $json[$key] = $value;
+            }
+        }
+    } else {
+        $json = $documents;
+    }
+
+    if (isset($json)) {
+        $json = json_encode($json);
+    } else {
+        $json = null;
+    }
+
+    // //     find the farmer
+    $find_farmer = "SELECT * FROM farmer_check_lists WHERE farmer_id = '$farmer_id'";
+    $find_farmer_query = mysqli_query($dbconnect, $find_farmer);
+    if (mysqli_num_rows($find_farmer_query) == 0) {
+        // insert farmer check list
+        $insert_farmer_check_list = "INSERT INTO farmer_check_lists(farmer_id, training, land_preparation, receiveid_input, pre_emerg_herbicide_app, planted, post_emerg_herbicide_app, first_fertilized, second_fertilized, harvest, weeding, watering, documents) VALUES 
+        ('$farmer_id', '$training', '$land_preparation', '$receiveid_input', '$pre_emerg_herbicide', '$planted', '$post_emerg_herbicide', '$first_fertilized', '$second_fertilized', '$harvest', '$weeding', '$watering', '$json')";
+        $insert_farmer_check_list_query = mysqli_query($dbconnect, $insert_farmer_check_list);
+        if ($insert_farmer_check_list_query) {
+            header('location: ../farmers.php?type=success&msg=Farmer check list updated successfully');
+            exit();
+        } else {
+            header('location: ../farmers.php?type=error&msg=Error updating farmer check list');
+            exit();
+        }
+    } else {
+        $update_farmer_check_list = "UPDATE farmer_check_lists SET training = '$training', land_preparation = '$land_preparation', receiveid_input = '$receiveid_input', pre_emerg_herbicide_app = '$pre_emerg_herbicide', planted = '$planted', post_emerg_herbicide_app = '$post_emerg_herbicide', first_fertilized = '$first_fertilized', second_fertilized = '$second_fertilized', harvest = '$harvest', weeding = '$weeding', watering = '$watering', documents = '$json' WHERE farmer_id = '$farmer_id'";
+        $update_farmer_check_list_query = mysqli_query($dbconnect, $update_farmer_check_list);
+        if ($update_farmer_check_list_query) {
+            header('location: ../farmers.php?type=success&msg=Farmer check list updated successfully');
+            exit();
+        } else {
+            header('location: ../farmers.php?type=error&msg=Error updating farmer check list');
+            exit();
+        }
+    }
+
+    // file upload error handling 
+    if (isset($file_error)) {
+        $file_error = implode(', ', $file_error);
+        header('location: ../farmers.php?type=error&msg=Error uploading ' . $file_error . ' file only jpg, jpeg, png allowed');
         exit();
     }
 }

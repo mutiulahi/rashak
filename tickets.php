@@ -57,7 +57,8 @@ include "includes/config.php";
                                                 <th>Farm Id</th>
                                                 <th>Crop</th>
                                                 <th>Harvest Date</th>
-                                                <th>Total Yield</th>
+                                                <th>Total Yield - Bag(s)</th>
+                                                <th>Mark-up Bag(s)</th>
                                                 <th>Warehouse to be delivered to</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -71,6 +72,7 @@ include "includes/config.php";
                                                     $crop = $farmActivity['crop'];
                                                     $harvest_date = $farmActivity['harvest_date'];
                                                     $total_yield = $farmActivity['total_yield'];
+                                                    $total_yield_rashak = $farmActivity['total_yield_rashak'];
                                                     $warehouse_to_be_delivered_to = $farmActivity['warehouse_to_be_delivered_to'];
                                                     $created_at = $farmActivity['created_at'];
 
@@ -80,17 +82,18 @@ include "includes/config.php";
                                                         <td><?php echo $crop; ?></td>
                                                         <td><?php echo $harvest_date; ?></td>
                                                         <td><?php echo $total_yield; ?></td>
+                                                        <td><?php echo $total_yield_rashak; ?></td>
                                                         <td><?php echo $warehouse_to_be_delivered_to; ?></td>
 
                                                         <td>
                                                             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#edittickit<?php echo substr($farm_id, -2); ?>"><i class="icofont-edit text-success"></i></button>
-                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#deleteproject<?php echo substr($farm_id, -2); ?>"><i class="icofont-ui-delete text-danger"></i></button>
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#edittickit<?php echo $id_id; ?>"><i class="icofont-edit text-success"></i></button>
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#deleteproject<?php echo $id_id; ?>"><i class="icofont-ui-delete text-danger"></i></button>
                                                             </div>
                                                         </td>
                                                     </tr>
                                                     <!-- Edit Tickit-->
-                                                    <div class="modal fade" id="deleteproject<?php echo substr($farm_id, -2); ?>" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal fade" id="deleteproject<?php echo $id_id; ?>" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -114,7 +117,8 @@ include "includes/config.php";
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="modal fade" id="edittickit<?php echo substr($farm_id, -2); ?>" tabindex="-1" aria-hidden="true">
+
+                                                    <div class="modal fade" id="edittickit<?php echo $id_id; ?>" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -138,8 +142,12 @@ include "includes/config.php";
                                                                                 <input type="date" class="form-control" value="<?php echo $harvest_date; ?>" name="harvest_date" id="deptwo">
                                                                             </div>
                                                                             <div class="col-md-12 mb-3">
-                                                                                <label for="deptwo" class="form-label">Total Yield</label>
+                                                                                <label for="deptwo" class="form-label">Total Yield - Bag(s)</label>
                                                                                 <input type="number" class="form-control" value="<?php echo $total_yield; ?>" name="total_yield" id="deptwo">
+                                                                            </div>
+                                                                            <div class="col-md-12 mb-3">
+                                                                                <label for="deptwo" class="form-label">Mark-up Bag(s)</label>
+                                                                                <input type="number" class="form-control" value="<?php echo $total_yield_rashak; ?>" name="total_yield_rashak" id="deptwo">
                                                                             </div>
                                                                             <div class="col-md-12 mb-3">
                                                                                 <label for="deptwo" class="form-label">Warehouse to be delivered to</label>
@@ -195,8 +203,12 @@ include "includes/config.php";
                                         <input type="date" class="form-control" name="harvest_date" id="deptwo" required>
                                     </div>
                                     <div class="col-md-12 mb-3">
-                                        <label for="deptwo" class="form-label">Total Yield</label>
+                                        <label for="deptwo" class="form-label">Total Yield Bag(s)</label>
                                         <input type="number" class="form-control" name="total_yield" id="deptwo" required>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="deptwo" class="form-label">Mark-up Bag(s)</label>
+                                        <input type="number" class="form-control" name="total_yield_rashak" id="deptwo" required>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="deptwo" class="form-label">Warehouse to be delivered to</label>
@@ -205,7 +217,7 @@ include "includes/config.php";
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" name="harvest" class="btn btn-primary">Add</button>
+                                    <button type="submit" name="harvest_button" class="btn btn-primary">Add</button>
                                 </div>
                             </form>
                         <?php } else {

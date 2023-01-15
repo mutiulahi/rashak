@@ -386,7 +386,12 @@ include "includes/config.php";
                                                                                         $harvest = $result_data['harvest'];
 
                                                                                         $documents = $result_data['documents'];
-                                                                                        $documents = json_decode($documents, true);
+                                                                                        if(empty($documents)){
+                                                                                            $documents = [];
+                                                                                        }else{
+                                                                                            $documents = json_decode($documents, true);
+                                                                                        }
+                                                                                        
                                                                                     }
                                                                                     if (empty($training)) {
                                                                                         $training = 'No';

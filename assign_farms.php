@@ -4,16 +4,10 @@ include "includes/config.php";
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Supervisor</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
-
-    <!-- project css file  -->
-    <link rel="stylesheet" href="assets/css/my-task.style.min.css">
-</head>
+<?php
+$title = 'Assign Farmer';
+include 'layout/head.php';
+?>
 
 <body>
 
@@ -47,33 +41,42 @@ include "includes/config.php";
                                     <table id="myProjectTable" class="table table-hover align-middle mb-0" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>Id</th>
+                                                <th>Farmer Id</th>
+                                                <th>Farmer's Name</th>
                                                 <th>Supervisor's Name</th>
-                                                <th>Email</th>
-                                                <th>Farmer id</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             if (isset($supervisor) and $supervisor > 0) {
-                                                while ($FarmersRow = mysqli_fetch_array($resultSupervisor)) {
+                                                while ($supervisorRow = mysqli_fetch_array($resultSupervisor)) {
+                                                    // $id = $supervisorRow['id'];
+                                                    // $name = $supervisorRow['name'];
+                                                    $supervisorArry[$supervisorRow['id']] = $supervisorRow['name'];
+                                                }
+                                            }
+                                            ?>
+                                            <?php
+                                            if (isset($farmers) and $farmers > 0) {
+                                                while ($FarmersRow = mysqli_fetch_array($resultFarmers)) {
                                                     $id = $FarmersRow['id'];
-                                                    $name = $FarmersRow['name'];
-                                                    $email = $FarmersRow['email'];
-                                                    $created_at = $FarmersRow['created_at'];
+                                                    $unique_id = $FarmersRow['unique_id'];
+                                                    $user_id = $FarmersRow['user_id'];
+                                                    $name = $FarmersRow['first_name'] . ' ' . $FarmersRow['last_name'];
                                             ?>
                                                     <tr>
-                                                        <td><?php echo $id; ?></td>
+                                                        <td><?php echo $unique_id; ?></td>
                                                         <td><?php echo $name; ?></td>
-                                                        <td><?php echo $email; ?></td>
-                                                        <td><?php echo getAssignedFarm($id) ?></td>
+                                                        <td><?php echo getAssignedFarm($user_id)
+                                                            ?></td>
                                                         <td>
                                                             <div class="btn-group" role="group" aria-label="Basic outlined example">
                                                                 <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editproject<?php echo $id; ?>"><i class="icofont-edit text-success"></i></button>
                                                             </div>
                                                         </td>
                                                     </tr>
+
                                                     <div class="modal fade" id="editproject<?php echo $id ?>" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
                                                             <div class="modal-content">
@@ -84,22 +87,22 @@ include "includes/config.php";
                                                                 <div class="modal-body">
                                                                     <form action="includes/process.php" method="post">
                                                                         <input type="hidden" class="form-control" name="redirect" value="assign_farms.php">
-                                                                        <input type="hidden" class="form-control" name="id" value="<?php echo $id ?>">
+                                                                        <input type="hidden" class="form-control" name="farmer_id" value="<?php echo $unique_id ?>">
                                                                         <div class="deadline-form">
                                                                             <div class="row g-3 mb-3">
                                                                                 <div class="col-sm-12">
                                                                                     <div class="col-sm-12">
-                                                                                        <label for="formFileMultipleone" class="form-label">Farmers</label>
-                                                                                        <select class="form-select" name="farm_id" aria-label="Default select example">
-                                                                                            <option selected>Select Farmer</option>
+                                                                                        <label for="formFileMultipleone" class="form-label">Supervisor</label>
+                                                                                        <select class="form-select" name="supervisor_id" aria-label="Default select example">
+                                                                                            <option selected>Select Supervisor</option>
                                                                                             <?php
-                                                                                            if (!empty($farm_array)) {
-                                                                                                foreach ($farm_array as $key => $farm) {
-                                                                                                    echo '<option value="' . $key . '">' . $farm . '</option>';
+                                                                                            if (!empty($supervisorArry)) {
+                                                                                                foreach ($supervisorArry as $key => $name) {
+                                                                                                    echo '<option value=' . $key . '>' . $name . '</option>';
                                                                                                 }
                                                                                             ?>
                                                                                             <?php
-                                                                                                
+
                                                                                             }
                                                                                             ?>
                                                                                         </select>
@@ -127,7 +130,7 @@ include "includes/config.php";
                 </div>
             </div>
 
-           
+
             <!-- Create Project-->
             <div class="modal fade" id="createproject" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
@@ -191,8 +194,36 @@ include "includes/config.php";
     <!-- Jquery Core Js -->
     <script src="assets/bundles/libscripts.bundle.js"></script>
 
+    <!-- Plugin Js-->
+    <script src="assets/bundles/dataTables.bundle.js"></script>
+
     <!-- Jquery Page Js -->
     <script src="../js/template.js"></script>
+    <script>
+        // project data table
+        $(document).ready(function() {
+            $('#myProjectTable')
+                .addClass('nowrap')
+                .dataTable({
+                    responsive: true,
+                    columnDefs: [{
+                        targets: [-1, -3],
+                        className: 'dt-body-right'
+                    }]
+                });
+            $('.deleterow').on('click', function() {
+                var tablename = $(this).closest('table').DataTable();
+                tablename
+                    .row($(this)
+                        .parents('tr'))
+                    .remove()
+                    .draw();
+
+            });
+        });
+    </script>
+
+
 
 </body>
 

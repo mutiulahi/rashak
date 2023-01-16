@@ -4,16 +4,10 @@ include "includes/config.php";
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Supervisor</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
-
-    <!-- project css file  -->
-    <link rel="stylesheet" href="assets/css/my-task.style.min.css">
-</head>
+<?php
+$title = 'Supervisor';
+include 'layout/head.php';
+?>
 
 <body>
 
@@ -57,6 +51,7 @@ include "includes/config.php";
                                         </thead>
                                         <tbody>
                                             <?php
+                                            $count = 1;
                                             if (isset($supervisor) and $supervisor > 0) {
                                                 while ($FarmersRow = mysqli_fetch_array($resultSupervisor)) {
                                                     $id = $FarmersRow['id'];
@@ -65,7 +60,7 @@ include "includes/config.php";
                                                     $created_at = $FarmersRow['created_at'];
                                             ?>
                                                     <tr>
-                                                        <td><?php echo $id; ?></td>
+                                                        <td><?php echo $count++; ?></td>
                                                         <td><?php echo $name; ?></td>
                                                         <td><?php echo $email; ?></td>
                                                         <td>
@@ -341,11 +336,9 @@ include "includes/config.php";
         </div>
     </div>
 
-    <!-- Jquery Core Js -->
-    <script src="assets/bundles/libscripts.bundle.js"></script>
-
-    <!-- Jquery Page Js -->
-    <script src="../js/template.js"></script>
+   <?php
+   include 'layout/js.php';
+   ?>
 
 </body>
 

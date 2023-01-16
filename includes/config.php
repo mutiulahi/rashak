@@ -49,7 +49,7 @@ if (isset($_GET['farm_id'])) {
 }
 
 // get farmer 
-$sql_farmers = "SELECT * FROM farmers";
+$sql_farmers = "SELECT * FROM farmers ";
 $resultFarmers = mysqli_query($dbconnect, $sql_farmers);
 $farmers = mysqli_num_rows($resultFarmers);
 
@@ -69,12 +69,12 @@ $members = mysqli_num_rows($resultMembers);
 function getAssignedFarm($supervisor_id)
 {
     include 'includes/database.php';
-    $sql = "SELECT * FROM farm_users INNER JOIN farmers ON  farmers.unique_id = farm_users.farm_id WHERE farm_users.user_id = '$supervisor_id'";
+    $sql = "SELECT DISTINCT * FROM farmers INNER JOIN users ON farmers.user_id = users.id WHERE farmers.user_id = '$supervisor_id'";
     $result = mysqli_query($dbconnect, $sql);
     $farm = mysqli_num_rows($result);
     $farm_detail = mysqli_fetch_array($result);
     if ($farm > 0) {
-        return $farm_detail['first_name'] . " " . $farm_detail['last_name'];
+        return $farm_detail['name'];
     } else {
         return "not assigned";
     }

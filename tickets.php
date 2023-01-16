@@ -5,18 +5,10 @@ include "includes/config.php";
 <html class="no-js" lang="en" dir="ltr">
 
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Farm-Harvest</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
-    <!-- plugin css file  -->
-    <link rel="stylesheet" href="assets/plugin/datatables/responsive.dataTables.min.css">
-    <link rel="stylesheet" href="assets/plugin/datatables/dataTables.bootstrap5.min.css">
-    <!-- project css file  -->
-    <link rel="stylesheet" href="assets/css/my-task.style.min.css">
-</head>
+<?php 
+$title = 'Farmers';
+include 'layout/head.php';
+?>
 
 <body>
 
@@ -232,39 +224,8 @@ include "includes/config.php";
         </div>
     </div>
 
-    <!-- Jquery Core Js -->
-    <script src="assets/bundles/libscripts.bundle.js"></script>
-
-    <!-- Plugin Js-->
-    <script src="assets/bundles/dataTables.bundle.js"></script>
-
-    <!-- Jquery Page Js -->
-    <script src="../js/template.js"></script>
-    <script>
-        // project data table
-        $(document).ready(function() {
-            $('#myProjectTable')
-                .addClass('nowrap')
-                .dataTable({
-                    responsive: true,
-                    columnDefs: [{
-                        targets: [-1, -3],
-                        className: 'dt-body-right'
-                    }]
-                });
-            $('.deleterow').on('click', function() {
-                var tablename = $(this).closest('table').DataTable();
-                tablename
-                    .row($(this)
-                        .parents('tr'))
-                    .remove()
-                    .draw();
-
-            });
-        });
-    </script>
+   <?php include 'layout/js.php' ?>
 </body>
 
-<!-- Mirrored from www.pixelwibes.com/template/my-task/html/dist/tickets.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Nov 2022 12:09:21 GMT -->
 
 </html>

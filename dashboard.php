@@ -339,7 +339,4 @@ $currentTime = time();
     <script src="js/template.js"></script>
     <script src="js/page/hr.js"></script>
 </body>
-
-<!-- Mirrored from www.pixelwibes.com/template/my-task/html/dist/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Nov 2022 12:07:12 GMT -->
-
 </html>

@@ -154,40 +154,30 @@ if (isset($_POST['edit_user'])) {
 // assign user to farm
 if (isset($_POST['ass_farm'])) {
     // Get form data and store in variables also sanitize data
-    $farm_id = mysqli_real_escape_string($dbconnect, $_POST['farm_id']);
-    $user_id = mysqli_real_escape_string($dbconnect, $_POST['id']);
+    $supervisor_id = mysqli_real_escape_string($dbconnect, $_POST['supervisor_id']);
+    $farmer_id = mysqli_real_escape_string($dbconnect, $_POST['farmer_id']);
     $redirect = mysqli_real_escape_string($dbconnect, $_POST['redirect']);
 
-    // check if user is already assigned to farm
-    $check = "SELECT * FROM farm_users WHERE user_id = '$user_id'";
-    $result = mysqli_query($dbconnect, $check);
-    if (mysqli_num_rows($result) > 0) {
-        // update farm_users table
-        $update = "UPDATE farm_users SET farm_id = '$farm_id', user_id = '$user_id' WHERE user_id = '$user_id'";
-        $result = mysqli_query($dbconnect, $update);
-        if ($result) {
-            header('location: ../' . $redirect . '?type=success&msg=User assigned to farm successfully');
-            exit();
-        } else {
-            header('location: ../' . $redirect . '?type=error&msg=Error assigning user to farm');
-            exit();
-        }
+    // update farm_users table
+    $update = "UPDATE farmers SET user_id = '$supervisor_id' WHERE unique_id = '$farmer_id'";
+    $result = mysqli_query($dbconnect, $update);
+    if ($result) {
+        header('location: ../' . $redirect . '?type=success&msg=User assigned to farm successfully');
+        exit();
     } else {
-        // insert to db in farm_details
-        $ass_farm = "INSERT INTO farm_users (farm_id, user_id) VALUES ('$farm_id', '$user_id')";
-        $result = mysqli_query($dbconnect, $ass_farm);
-        if ($result) {
-            header('location: ../' . $redirect . '?type=success&msg=User assigned successfully');
-            exit();
-        } else {
-            header('location: ../' . $redirect . '?type=error&msg=Error assigning user');
-            exit();
-        }
+        header('location: ../' . $redirect . '?type=error&msg=Error assigning user to farm');
+        exit();
     }
 }
 
 // start farmer onboardfarmer
 if (isset($_POST['onboardfarmer'])) {
+    if ($_SESSION['id'] == 1) {
+        $user_id = null;
+    } else {
+        $user_id = $_SESSION['auth_id'];
+    }
+
     $unique_id = 'RASH/FARMER/' . substr(date("Y"), -2) . '/' . rand(0000, 9999);
     $unique_id = strtoupper($unique_id);
     $email = mysqli_real_escape_string($dbconnect, $_POST['email']);
@@ -279,8 +269,8 @@ if (isset($_POST['onboardfarmer'])) {
     $start_check_list_query = mysqli_query($dbconnect, $start_check_list);
 
 
-    $onboardfarmer = "INSERT INTO farmers(unique_id, input_crop, email, first_name, last_name, phone_number, date_of_birth, gender, disability, marital_status, did_you_have_children, numbers_of_children, is_children_in_school, average_monthly_income, other_income, land_size,land_coordinate, land_picture, upload_profile_picture, farm_location, home_address, state_of_origin, nationality, national_means_of_identity, commitment_fee, reciept_of_commitment) 
-    VALUES ('$unique_id','$input_crop', '$email', '$first_name',  '$last_name', '$phone_number', '$date_of_birth', '$gender', '$disability', '$marital_status', '$did_you_have_children', '$numbers_of_children', '$is_children_in_school', '$average_monthly_income', '$other_income', '$land_size','$land_coordinate', '$farmer_land_pic_destination', '$farmer_profile_pic_destination', '$farm_location', '$home_address', '$state_of_origin', '$nationality', '$farmer_national_means_of_identity_destination', '$commitment_fee', '$farmer_reciept_of_commitment_destination')";
+    $onboardfarmer = "INSERT INTO farmers(unique_id, user_id, input_crop, email, first_name, last_name, phone_number, date_of_birth, gender, disability, marital_status, did_you_have_children, numbers_of_children, is_children_in_school, average_monthly_income, other_income, land_size,land_coordinate, land_picture, upload_profile_picture, farm_location, home_address, state_of_origin, nationality, national_means_of_identity, commitment_fee, reciept_of_commitment) 
+    VALUES ('$unique_id','$user_id','$input_crop', '$email', '$first_name',  '$last_name', '$phone_number', '$date_of_birth', '$gender', '$disability', '$marital_status', '$did_you_have_children', '$numbers_of_children', '$is_children_in_school', '$average_monthly_income', '$other_income', '$land_size','$land_coordinate', '$farmer_land_pic_destination', '$farmer_profile_pic_destination', '$farm_location', '$home_address', '$state_of_origin', '$nationality', '$farmer_national_means_of_identity_destination', '$commitment_fee', '$farmer_reciept_of_commitment_destination')";
     $result = mysqli_query($dbconnect, $onboardfarmer);
     if ($result) {
         header('location: ../farmers.php?type=success&msg=Farmer onboarded successfully');
@@ -290,7 +280,6 @@ if (isset($_POST['onboardfarmer'])) {
         exit();
     }
 }
-
 
 
 // delete from any table and redirect to page 

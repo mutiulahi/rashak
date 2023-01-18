@@ -411,3 +411,8 @@ if (isset($_POST['check_list'])) {
         exit();
     }
 }
+
+if (!isset($_POST)) {
+    header('location: ../farmers.php?type=error&msg=Error updating farmer check list');
+    exit();
+}
